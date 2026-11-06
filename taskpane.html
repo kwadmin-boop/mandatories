@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kiwiherb Mandatories</title>
+<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+<style>
+:root {
+  --bg: #f4f7f4;
+  --surface: #ffffff;
+  --ink: #18221c;
+  --muted: #56645b;
+  --line: #d3ddd5;
+  --accent: #2b6a3a;
+  --accent-ink: #ffffff;
+  --accent-soft: #e2efe4;
+  --fix: #b3261e;
+  --fix-ink: #ffffff;
+  --fix-soft: #fbe7e4;
+  --check: #8a5800;
+  --check-ink: #ffffff;
+  --check-soft: #fdf0d2;
+  --style: #34598f;
+  --style-ink: #ffffff;
+  --style-soft: #e5edf8;
+  --body: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141a16;
+    --surface: #1c241f;
+    --ink: #e4ebe5;
+    --muted: #9cada2;
+    --line: #34423a;
+    --accent: #7fc58f;
+    --accent-ink: #0c1a10;
+    --accent-soft: #1f3526;
+    --fix: #ff8b7d;
+    --fix-ink: #2a0b07;
+    --fix-soft: #3a1c19;
+    --check: #f0c260;
+    --check-ink: #2a1d02;
+    --check-soft: #372b12;
+    --style: #93b4ec;
+    --style-ink: #0b1526;
+    --style-soft: #1b2638;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 var(--body); }
+.app { display: grid; gap: 12px; padding: 14px 14px 20px; min-width: 0; }
+h1 { font-size: 1.15rem; line-height: 1.2; margin: 0; letter-spacing: -0.01em; }
+a { color: var(--accent); }
+.top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.mark { flex: none; width: 30px; height: 30px; border-radius: 8px; background: var(--accent); display: grid; place-items: center; }
+.mark svg { width: 18px; height: 18px; }
+.sub { margin: 1px 0 0; color: var(--muted); font-size: 0.82rem; }
+.help { font-size: 0.86rem; white-space: nowrap; }
+
+.controls { display: grid; gap: 8px; }
+.field { display: grid; gap: 4px; font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+select { width: 100%; font: inherit; font-size: 0.95rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; min-height: 34px; }
+select:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { font: inherit; font-size: 0.9rem; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 12px; min-height: 32px; cursor: pointer; }
+button:hover:not(:disabled) { border-color: var(--accent); }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+.controls .primary { width: 100%; min-height: 36px; }
+
+.status { margin: 0; font-size: 0.88rem; color: var(--muted); min-height: 1.3em; overflow-wrap: anywhere; }
+.status.error { color: var(--fix); }
+.counts { display: flex; flex-wrap: wrap; gap: 6px; }
+.counts:empty { display: none; }
+.pill { font-size: 0.8rem; font-weight: 700; padding: 2px 10px; border-radius: 999px; }
+.pill.fix { background: var(--fix-soft); color: var(--fix); }
+.pill.check { background: var(--check-soft); color: var(--check); }
+.pill.style { background: var(--style-soft); color: var(--style); }
+.pill.clear { background: var(--accent-soft); color: var(--accent); }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.opt { display: flex; gap: 8px; align-items: flex-start; font-size: 0.86rem; cursor: pointer; }
+.opt input { margin: 2px 0 0; accent-color: var(--accent); }
+.hint { margin: 0; color: var(--muted); font-size: 0.82rem; overflow-wrap: anywhere; }
+.hint:empty { display: none; }
+.link { border: 0; background: none; padding: 0; min-height: 0; color: var(--accent); text-decoration: underline; text-underline-offset: 2px; font-size: inherit; }
+
+.issues { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.issue { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px 8px 8px; display: grid; grid-template-columns: minmax(0, 1fr); column-gap: 10px; }
+.issue.open { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.go { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 8px; row-gap: 2px; text-align: left; border: 0; background: none; padding: 0; min-height: 0; color: inherit; font-size: inherit; cursor: pointer; }
+.go:hover .name { text-decoration: underline; text-underline-offset: 2px; }
+.badge { grid-row: span 2; display: inline-flex; align-items: center; justify-content: center; min-width: 26px; height: 22px; padding: 0 5px; border-radius: 999px; background: var(--fix); color: var(--fix-ink); font-size: 0.74rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.badge.check { background: var(--check); color: var(--check-ink); }
+.badge.style { background: var(--style); color: var(--style-ink); }
+.name { font-weight: 700; overflow-wrap: anywhere; }
+.rule { font-family: var(--mono); font-size: 0.72rem; font-weight: 500; padding: 0 5px; border-radius: 4px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); white-space: nowrap; }
+.what { grid-column: 2; color: var(--muted); font-size: 0.85rem; overflow-wrap: anywhere; }
+.what .to { color: var(--accent); font-weight: 700; }
+.detail { margin: 6px 0 0 34px; font-size: 0.86rem; overflow-wrap: anywhere; }
+.detail p { margin: 0; }
+.detail .meta { color: var(--muted); font-size: 0.8rem; margin-top: 4px; }
+.acts { display: flex; flex-wrap: wrap; gap: 6px; margin: 7px 0 0 34px; }
+@media (min-width: 420px) {
+  .issue { grid-template-columns: minmax(0, 1fr) auto; }
+  .go { grid-column: 1; grid-row: 1; }
+  .acts { grid-column: 2; grid-row: 1; margin: 0; align-self: start; flex-wrap: nowrap; }
+  .detail { grid-column: 1 / -1; }
+}
+.mini { font-size: 0.82rem; padding: 3px 10px; min-height: 28px; }
+.none { color: var(--muted); font-size: 0.88rem; padding: 4px 2px; }
+
+.box { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 0 10px; }
+.box summary { cursor: pointer; padding: 8px 0; font-weight: 700; font-size: 0.9rem; }
+.box summary span { color: var(--muted); font-weight: 400; }
+.box[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+.eye { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 2px; }
+.eye label { display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 6px; align-items: start; font-size: 0.84rem; padding: 4px 2px; border-radius: 6px; cursor: pointer; }
+.eye input { margin: 2px 0 0; accent-color: var(--accent); }
+.eye input:checked ~ .eye-text { color: var(--muted); text-decoration: line-through; }
+.more { display: grid; gap: 8px; padding-bottom: 10px; }
+.more button { width: 100%; text-align: left; }
+.copy-fallback { display: grid; gap: 6px; padding: 10px; border: 1px solid var(--accent); border-radius: 8px; background: var(--accent-soft); }
+.copy-fallback p { margin: 0; font-size: 0.84rem; }
+.copy-fallback textarea { width: 100%; min-height: 120px; font: 0.78rem/1.4 var(--mono); border: 1px solid var(--line); border-radius: 6px; padding: 6px; background: var(--surface); color: var(--ink); }
+.foot { color: var(--muted); font-size: 0.78rem; margin: 4px 0 0; }
+.outside { padding: 18px 16px; display: grid; gap: 10px; }
+.outside p { margin: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .issue { transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+}
+
+</style>
+</head>
+<body>
+<div id="app" class="app" hidden>
+  <header class="top">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-ink)"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+      <div><h1>Mandatories</h1><p class="sub">Kiwiherb copy check</p></div>
+    </div>
+    <a class="help" id="help-link" href="help.html" target="_blank" rel="noopener">Help and rules</a>
+  </header>
+
+  <div class="controls">
+    <label class="field" for="ctype"><span>Checking this document as</span>
+      <select id="ctype">
+        <option value="document">A Word document</option>
+        <option value="web">A web page or email</option>
+        <option value="social">A social post</option>
+        <option value="pos">POS or print</option>
+        <option value="packaging-nz">New Zealand packaging</option>
+        <option value="packaging-au">Australian packaging</option>
+      </select>
+    </label>
+    <button type="button" id="check" class="primary">Check document</button>
+  </div>
+
+  <p id="status" class="status" role="status" aria-live="polite"></p>
+  <div id="counts" class="counts"></div>
+
+  <div class="bar">
+    <button type="button" id="fix-all">Fix all safe</button>
+  </div>
+  <label class="opt" id="track-opt" hidden><input type="checkbox" id="track"><span>Show my fixes as tracked changes</span></label>
+  <p id="track-note" class="hint" hidden></p>
+
+  <ol id="issues" class="issues" aria-label="Issues found"></ol>
+  <p id="ignored" class="hint"></p>
+
+  <details class="box" id="eye-box">
+    <summary>Check by eye <span id="eye-count"></span></summary>
+    <ul id="eye" class="eye"></ul>
+  </details>
+
+  <details class="box" id="more-box">
+    <summary>More</summary>
+    <div class="more">
+      <button type="button" id="add-comments">Add the issues as Word comments</button>
+      <button type="button" id="remove-comments">Remove the checker's comments</button>
+      <button type="button" id="copy-report">Copy a report</button>
+      <p class="hint" id="more-hint">Comments put each issue in the document for whoever reviews it next. Checking again does not remove them.</p>
+    </div>
+  </details>
+
+  <div id="copy-fallback" class="copy-fallback" hidden>
+    <p id="copy-fallback-msg"></p>
+    <textarea id="copy-fallback-text" readonly></textarea>
+    <div><button type="button" id="copy-fallback-close">Done</button></div>
+  </div>
+
+  <p class="foot">Rules from the Kiwiherb Copy Mandatories 2023/2024/2025/2026. Checks the main text of the document, including tables. Headers, footers, text boxes and footnotes are not checked. Word panel version <span id="version"></span>.</p>
+</div>
+
+<div id="outside" class="outside" hidden>
+  <h1>Mandatories</h1>
+  <p id="outside-msg">Open this panel from Word: on the Home tab, choose Mandatories.</p>
+</div>
+
+<script>
+/* Runs first and in old browsers too: the checker needs a current browser engine (regular expression lookbehind). */
+(function () {
+  var ok = true;
+  try { new RegExp("(?<=a)b"); } catch (e) { ok = false; }
+  if (!ok) {
+    window.__TOO_OLD__ = true;
+    document.getElementById("outside").hidden = false;
+    document.getElementById("outside-msg").innerHTML = "This version of Word is too old for the checker. Use Word for Microsoft 365, Word on the web (office.com) or Word 2021 and later.";
+  }
+})();
+</script>
+<script>
+/* Kiwiherb Copy Mandatories (2023-2026): automatic checks.
+   Same rules as mandatories_scan.py. FIX = clear breach, CHECK = needs judgement.
+   Each finding: {start, end, rule, kind, line, found, advice, edits:[{start,end,text}]} */
+var MandatoriesEngine = (function () {
+  "use strict";
+
+  var ALL = ["document", "web", "social", "pos", "packaging-nz", "packaging-au"];
+  var PACK = ["packaging-nz", "packaging-au"];
+  var AU = ["packaging-au"];
+  var NOT_SOCIAL = ALL.filter(function (t) { return t !== "social"; });
+  var NOT_PACK = ALL.filter(function (t) { return PACK.indexOf(t) < 0; });
+  var TWO_SPACES = ["document", "pos", "packaging-nz", "packaging-au"];
+  var NEEDS_HP_LINE = ["social", "pos", "packaging-nz", "packaging-au"];
+  var HP_EXACT = "If symptoms persist, talk to your health professional.";
+
+  function has(list, t) { return list.indexOf(t) >= 0; }
+
+  function matchCase(src, target) {
+    var up = src.toUpperCase(), low = src.toLowerCase();
+    if (src.length > 1 && src === up && up !== low) return target.toUpperCase();
+    var c = src.charAt(0);
+    if (c !== c.toLowerCase()) return target.charAt(0).toUpperCase() + target.slice(1);
+    return target;
+  }
+
+  function addCommas(num) {
+    var parts = num.split(".");
+    if (/^\d{4,}$/.test(parts[0])) parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+  }
+
+  var RULES = [];
+  function add(rule, kind, pattern, advice, types, flags, fix, safe) {
+    RULES.push({
+      rule: rule, kind: kind, advice: advice, types: types || ALL, fix: fix || null, safe: safe !== false,
+      re: new RegExp(pattern, (flags === undefined ? "i" : flags) + "g")
+    });
+  }
+
+  // G2 te reo Maori: words that must carry macrons
+  var MACRONS = {
+    "manuka": "mānuka", "maori": "Māori", "rongoa": "rongoā", "kanuka": "kānuka",
+    "kumarahou": "kūmarahou", "kumerahou": "kūmerahou", "tanekaha": "tānekaha", "korero": "kōrero",
+    "nga mahi": "ngā mahi", "totara": "tōtara", "whanau": "whānau", "kowhai": "kōwhai",
+    "pohutukawa": "pōhutukawa", "rata": "rātā"
+  };
+  Object.keys(MACRONS).forEach(function (plain) {
+    var lead = plain === "rata" ? "(?<!pro )\\b" : "\\b";
+    var right = MACRONS[plain];
+    add("G2", "FIX", lead + plain + "\\b", "te reo Māori needs macrons: " + right, ALL, "i",
+      function (s) { return matchCase(s, right); });
+  });
+
+  // G7, G10, G11, G15
+  add("G7", "CHECK", "\\s&\\s", "use 'and' in full, unless it is part of a product name (eg Foot & Nail Cream) or approved for social", ALL, "i",
+    function (s) { return s.replace("&", "and"); });
+  add("G10", "CHECK", "\\bLtd\\b\\.?", "write Limited in full in copy (packaging and partner names are exceptions)", NOT_PACK, "i",
+    function () { return "Limited"; });
+  add("G11", "FIX", "\\b(?:e\\.g\\.|i\\.e\\.|eg\\.|ie\\.)(?=[\\s,;:)])", "write eg / ie with no full stops", ALL, "i",
+    function (s) { var l = s.toLowerCase().replace(/\./g, ""); return matchCase(s, l); });
+  add("G15", "FIX", "(?<![.\\w@-])NZ(?!\\w)", "write New Zealand in full (NZ is allowed on social only)", NOT_SOCIAL, "",
+    function () { return "New Zealand"; }, false);
+
+  // G12 British English (US form -> NZ/UK form)
+  var US_UK = {
+    "color": "colour", "colors": "colours", "colored": "coloured", "coloring": "colouring", "colorful": "colourful",
+    "flavor": "flavour", "flavors": "flavours", "flavored": "flavoured", "flavoring": "flavouring",
+    "favor": "favour", "favorite": "favourite", "favorites": "favourites", "behavior": "behaviour",
+    "behaviors": "behaviours", "odor": "odour", "odors": "odours", "humor": "humour", "labor": "labour",
+    "tumor": "tumour", "tumors": "tumours", "neighbor": "neighbour", "fiber": "fibre", "fibers": "fibres",
+    "center": "centre", "centers": "centres", "liter": "litre", "liters": "litres",
+    "milliliter": "millilitre", "milliliters": "millilitres", "gray": "grey", "mold": "mould",
+    "aging": "ageing", "defense": "defence", "defenses": "defences", "offense": "offence",
+    "catalog": "catalogue", "edema": "oedema", "esophagus": "oesophagus", "estrogen": "oestrogen",
+    "hemorrhoids": "haemorrhoids", "hemoglobin": "haemoglobin", "pediatric": "paediatric",
+    "anemia": "anaemia", "anesthetic": "anaesthetic", "diarrhea": "diarrhoea", "leukemia": "leukaemia",
+    "orthopedic": "orthopaedic", "gynecology": "gynaecology", "feces": "faeces", "maneuver": "manoeuvre",
+    "skeptical": "sceptical", "jewelry": "jewellery", "cozy": "cosy", "pajamas": "pyjamas",
+    "aluminum": "aluminium", "fulfill": "fulfil", "enroll": "enrol", "skillful": "skilful",
+    "licorice": "liquorice", "traveled": "travelled", "traveling": "travelling", "canceled": "cancelled", "labeled": "labelled",
+    "labeling": "labelling", "modeled": "modelled", "fueled": "fuelled", "counseling": "counselling",
+    "mom": "mum", "moms": "mums"
+  };
+  add("G12", "FIX", "\\b(?:" + Object.keys(US_UK).join("|") + ")\\b", "British English spelling", ALL, "i",
+    function (s) { return matchCase(s, US_UK[s.toLowerCase()]); });
+  add("G12", "CHECK", "\\b(?:meter|meters)\\b", "metre for a measurement (meter only for a device)");
+  add("G12", "CHECK", "\\bprogram(?:s)?\\b", "programme, unless it is a computer program");
+  add("G12", "CHECK", "\\b(?:a|the|your|our|in|clinical|private)\\s+practise\\b", "practice is the noun, practise the verb");
+  add("G12", "FIX", "\\bto\\s+practice\\b", "practise is the verb (to practise)", ALL, "i",
+    function (s) { return s.replace(/practice$/i, function (m) { return matchCase(m, "practise"); }); });
+  add("S20", "FIX", "\\b(?:medical|professional|expert|health|for|seek|your|the|our|of|some|any)\\s+advise\\b",
+    "advice is the noun (advise is the verb)", ALL, "i",
+    function (s) { return s.replace(/advise$/i, function (m) { return matchCase(m, "advice"); }); });
+
+  // S2, S3, S4, S10, S12, S19
+  add("S2", "FIX", "\\baqua\\b", "use purified water (Aqua is no longer used)", ALL, "i",
+    function (s) { return matchCase(s, "purified water"); }, false);
+  add("S3", "CHECK", "scientifically studied|contains organic ingredients", "misleading button or roundel: discontinue");
+  add("S4", "FIX", "\\bplant[\\s-]?caps?\\b|\\b(?:veggie|vegie|vegi|veg)[\\s-]?caps?\\b|\\bvegecaps?\\b",
+    "use Vege Cap (AU packaging: Hard Capsule)", ALL, "i",
+    function (s, t) { var pl = /s$/i.test(s); return t === "packaging-au" ? (pl ? "Hard Capsules" : "Hard Capsule") : (pl ? "Vege Caps" : "Vege Cap"); });
+  add("S4", "FIX", "\\bvege\\s+caps?\\b", "AU packaging uses the TGA descriptor Hard Capsule", AU, "i",
+    function (s) { return /s$/i.test(s) ? "Hard Capsules" : "Hard Capsule"; });
+  add("S10", "FIX", "\\bglycerine?\\b", "use Glycerol", ALL, "i", function (s) { return matchCase(s, "glycerol"); });
+  add("S12", "FIX", "\\bNew Zealand Hops\\b", "New Zealand Hops is no longer correct", ALL, "i",
+    function (s) { return matchCase(s, "hops"); });
+  add("S19", "FIX", "\\byellow beeswax\\b", "use Organic Beeswax (unless matching the listing notification)", ALL, "i",
+    function (s) { return s.replace(/yellow/i, function (m) { return matchCase(m, "organic"); }); });
+
+  // S6, S9, S14 units and numbers
+  add("S6", "FIX", "\\b\\d+(?:[.,]\\d+)*(?:mL|ml|mls|mg|mcg|µg|μg|g|kg)\\b", "space between number and unit, and mL not ml (eg 15 mL, 500 mg)", ALL, "",
+    function (s) {
+      var m = s.match(/^([\d.,]+)(.*)$/), unit = m[2];
+      if (/^(?:ml|mls|Ml)$/.test(unit)) unit = "mL";
+      return addCommas(m[1]) + " " + unit;
+    });
+  add("S14", "FIX", "\\b(?:ml|mls|Ml)\\b", "mL (lower m, capital L), unless the publication's convention is ml", ALL, "",
+    function () { return "mL"; });
+  add("S9", "CHECK", "\\b(?:\\d{1,3}(?:,\\d{3})+|\\d{4,})\\s?mg\\b", "over 1,000 mg: consider g, and keep one unit across the ingredient list");
+  add("S9", "FIX", "(?:\\$\\s?\\d{4,}|\\b\\d{4,}\\s?(?:mg|mL|g|kg|mcg|IU)\\b)", "use a comma for 1,000 and over", ALL, "",
+    function (s) { return s.replace(/\d{4,}/, addCommas); });
+
+  // S15 mucus / mucous, S16 ranges, S18 years
+  add("S15", "CHECK", "\\bmucous\\b(?!\\s+membranes?)", "mucous is the adjective (mucous membrane); the substance is mucus");
+  add("S15", "FIX", "\\bmucus\\s+membranes?\\b", "mucous membrane", ALL, "i",
+    function (s) { return s.replace(/mucus/i, function (m) { return matchCase(m, "mucous"); }); });
+  add("S16", "FIX", "\\b\\d+(?:\\.\\d+)?(?:\\s+[-\\u2013\\u2014]\\s*|\\s*[-\\u2013\\u2014]\\s+|[\\u2013\\u2014])\\d+(?:\\.\\d+)?\\b",
+    "ranges: plain hyphen, no spaces (eg 20-30 mL)", ALL, "i",
+    function (s) { return s.replace(/\s*[-\u2013\u2014]\s*/, "-"); });
+  add("S18", "FIX", "\\byrs?\\b", "write years in full", ALL, "i",
+    function (s) { return matchCase(s, s.toLowerCase() === "yr" ? "year" : "years"); });
+  var NO_YEARS = "(?!\\s*(?:years|months|weeks|yrs)|\\d|\\s*[-\\u2013]\\s*\\d)";
+  function addYears(s) { return /\+$/.test(s) ? s.replace(/\+$/, " years and over") : s + " years"; }
+  add("S18", "FIX", "\\b(?:children|kids|adults?)\\s+(?:over|under|from|aged)\\s+\\d{1,2}(?:\\s*[-\\u2013]\\s*\\d{1,2})?\\+?" + NO_YEARS,
+    "add 'years' after the age (eg children over 12 years)", ALL, "i", addYears, false);
+  add("S18", "FIX", "\\baged?\\s+\\d{1,2}(?:\\s*[-\\u2013]\\s*\\d{1,2})?\\+?" + NO_YEARS, "add 'years' after the age (eg aged 2 years and over)", ALL, "i", addYears, false);
+  add("S18", "FIX", "\\b(?:children|kids|adults?)\\s+\\d{1,2}\\+(?!\\s*(?:years|yrs))", "add 'years' after the age (eg 12 years and over)", ALL, "i", addYears, false);
+
+  // S20 hyphenation word lists
+  function hyphenate(s) { return s.replace(/^(anti|de|multi|un)\s?/i, "$1-"); }
+  function join(s) { return s.replace(/[-\s]+/, ""); }
+  function twoWords(s) { return s.replace(/^(hay|trans|long|night)-?/i, "$1 "); }
+  [
+    ["\\banti\\s?inflammator(?:y|ies)\\b", "anti-inflammatory", "FIX", hyphenate],
+    ["\\banti\\s?anxiety\\b", "anti-anxiety", "FIX", hyphenate],
+    ["\\banti\\s?emetics?\\b", "anti-emetic", "FIX", hyphenate],
+    ["\\banti\\s?pigmentation\\b", "anti-pigmentation", "FIX", hyphenate],
+    ["\\banti\\s?virals?\\b", "anti-viral", "FIX", hyphenate],
+    ["\\banti\\s?o?edema\\b|\\banti-edema\\b", "anti-oedema", "FIX", function (s) { return matchCase(s, "anti-oedema"); }],
+    ["\\bde\\s?stuff\\b", "de-stuff", "FIX", hyphenate],
+    ["\\bmulti\\s?action\\b", "multi-action", "FIX", hyphenate],
+    ["\\bnon[\\s-]?habit-forming\\b|\\bnon\\s?habit\\s+forming\\b", "non-habit forming", "FIX", function (s) { return matchCase(s, "non-habit forming"); }],
+    ["\\bun\\s?block(?:ing|ed|s)?\\b", "un-block / un-blocking", "FIX", hyphenate],
+    ["\\bsleep\\s+inducing\\b", "sleep-inducing (hyphen before a noun)", "CHECK", null],
+    ["\\banti[-\\s]histamines?\\b", "antihistamine", "FIX", join],
+    ["\\banti[-\\s]allergic\\b", "antiallergic", "FIX", join],
+    ["\\banti[-\\s]coagulants?\\b", "anticoagulant", "FIX", join],
+    ["\\banti[-\\s]platelets?\\b", "antiplatelet", "FIX", join],
+    ["\\banti[-\\s]depressants?\\b", "antidepressant", "FIX", join],
+    ["\\banti[-\\s]tussives?\\b", "antitussive", "FIX", join],
+    ["\\banti[-\\s]fungals?\\b", "antifungal", "FIX", join],
+    ["\\banti[-\\s]bacterials?\\b", "antibacterial", "FIX", join],
+    ["\\banti[-\\s]microbials?\\b", "antimicrobial", "FIX", join],
+    ["\\banti[-\\s]oxidants?\\b", "antioxidant", "FIX", join],
+    ["\\banti[-\\s]septics?\\b", "antiseptic", "FIX", join],
+    ["\\banti[-\\s]spasmodics?\\b", "antispasmodic", "FIX", join],
+    ["\\bcardio[-\\s]protective\\b", "cardioprotective", "FIX", join],
+    ["\\bde[-\\s]congestants?\\b", "decongestant", "FIX", join],
+    ["\\bon-going\\b", "ongoing", "FIX", join],
+    ["\\bover[-\\s](?:active|stimulated|whelmed)\\b", "overactive / overstimulated / overwhelmed", "FIX", join],
+    ["\\bun[-\\s]well\\b", "unwell", "FIX", join],
+    ["\\bwell[-\\s]being\\b", "wellbeing", "FIX", join],
+    ["\\bhay-?fever\\b", "hay fever", "FIX", twoWords],
+    ["\\btrans-?epidermal\\b", "trans epidermal", "FIX", twoWords],
+    ["\\blong-?lasting\\b", "long lasting (word list), but S20b hyphenates before a noun: confirm", "CHECK", null],
+    ["\\bnight-?time\\b", "night time (word list), but S20b hyphenates before a noun: confirm", "CHECK", null],
+    ["\\bNew Zealand-grown\\b", "New Zealand grown (no hyphen)", "FIX", function (s) { return s.replace("-", " "); }]
+  ].forEach(function (r) { add("S20", r[2], r[0], r[1], ALL, "i", r[3]); });
+
+  // S22 and Australia-only wording
+  add("S22", "CHECK", "\\bDosage\\b", "small packaging panels default to Directions, not Dosage", PACK, "");
+  add("A1", "FIX", "store below 30\\s?°C,?\\s*away from direct sunlight", "use 'Store below 30°C'", AU, "i",
+    function (s) { return s.replace(/,?\s*away from direct sunlight/i, ""); });
+  add("A1", "FIX", "however, the quality and potency remain unaffected", "use 'The quality and potency, however, remain unaffected.'", AU);
+  add("A7", "FIX", "water or juice,\\s+and drink", "remove the comma after juice", AU, "i",
+    function (s) { return s.replace(/,\s+and/, " and"); });
+  add("A8", "FIX", "(?:µL|μL)|\\b(?:uL|mcL)\\b|\\b[Mm]icroliters?\\b", "write microlitres in full", AU, "",
+    function (s) { return /^[Mm]icroliter/.test(s) ? s.replace("liter", "litre") : "microlitres"; });
+  add("A11", "FIX", "please recycle me", "use the 'Please recycle' logo wording", AU, "i", function () { return "Please recycle"; });
+  add("A15", "FIX", "\\b(?:equivalent to|derived from)\\b", "use 'from' (eg from 750 mg dry root)", AU, "i",
+    function (s) { return matchCase(s, "from"); });
+  add("A15", "CHECK", "\\b(?:equivalent to|derived from)\\b", "listed under Australia: confirm whether 'from' applies in New Zealand too", ["packaging-nz"]);
+
+  // House rule (not yet in the mandatories document)
+  add("HOUSE", "FIX", "\\s*\\u2014\\s*|(?<=\\w)--(?=\\w)|\\s--\\s", "no em dashes: rewrite with a comma, colon or full stop", ALL, "",
+    function () { return ", "; }, false);
+  add("HOUSE", "CHECK", "\\s\\u2013\\s", "spaced en dash used as a dash: rewrite (ranges use a plain hyphen)", ALL, "",
+    function () { return ", "; });
+
+  var LATIN = "Echinacea|Pelargonium|Sambucus|Thymus|Glycyrrhiza|Marrubium|Inula|Mentha|Matricaria|Melissa|Zingiber|" +
+    "Withania|Valeriana|Passiflora|Humulus|Scutellaria|Piper|Leptospermum|Kunzea|Veronica|Pseudowintera|" +
+    "Pomaderris|Phyllocladus|Hoheria|Dysoxylum|Metrosideros|Podocarpus|Olea|Vitex|Euphrasia|Ginkgo|" +
+    "Rehmannia|Salvia|Plantago|Rheum|Prunus|Lavandula|Curcuma|Camellia|Eucalyptus|Foeniculum|Symphytum|" +
+    "Verbascum|Hyssopus|Althaea|Ribes|Andrographis|Astragalus|Silybum|Taraxacum|Calendula|Hypericum|" +
+    "Avena|Crataegus|Bacopa|Centella|Urtica|Achillea|Filipendula|Ulmus|Allium|Rhodiola|Panax|Vaccinium";
+  var EPITHET_STOP = ["Plus", "Complex", "Oil", "Spray", "Syrup", "Drops", "Balm", "Cream", "Gold", "Forte", "Extra",
+    "Honey", "Tea", "Leaf", "Root", "Flower", "Extract", "Capsules", "Tablets", "Tincture", "Kids",
+    "Range", "Juice", "Formula", "Blend", "Throat", "Lozenges", "Gummies", "Glycetract", "Elixir"];
+  var LATIN_FULL = new RegExp("^(?:" + LATIN + ")$");
+  var EPITHET_END = /(?:a|ae|um|us|is|ii|ia|e|es|ensis|oides|ica|ana|ina|osa|alis|ens|ans|or)$/;
+  var IZE_EXEMPT = {};
+  ["size", "resize", "oversize", "downsize", "upsize", "supersize", "undersize", "outsize", "bitesize", "lifesize",
+    "kingsize", "midsize", "fullsize", "prize", "seize", "capsize"].forEach(function (w) {
+    ["", "s", "d", "r", "rs"].forEach(function (s) { IZE_EXEMPT[w + s] = true; });
+  });
+  ["sizing", "resizing", "downsizing", "upsizing", "seizing", "capsizing", "maize", "baize", "assize", "assizes",
+    "belize"].forEach(function (w) { IZE_EXEMPT[w] = true; });
+
+  // G8: herb names from the herb poster master spreadsheet, plus a few Kiwiherb herbs it does not list
+  var HERB_NAMES = ["Phyllocladus trichomanoides", "Caulophyllum thalictroides", "Eleutherococcus senticosus", "Zanthoxylum clava-herculis", "Cryptolepis sanguinolenta", "Eschscholtzia californica", "Trigonella foenum-graecum", "Astragalus membranaceous", "Harpagophytum procumbens", "Andrographis paniculata", "Arctostaphylos uva-ursi", "Capsella bursa-pastoris", "Scutellaria baicalensis", "Scutellaria lateriflora", "Aesculus hippocastanum", "Echinacea angustifolia", "Echinacea Angustifolia", "Eupatorium perfoliatum", "Leptospermum scoparium", "Parietaria officinalis", "Pseudowintera colorata", "Rosmarinus officinalis", "Agaricus subrufescens", "Angelica archangelica", "Calendula officinalis", "Epilobium parviflorum", "Euphrasia officinalis", "Lavandula officinalis", "Matricaria chamomilla", "Pellitory of the Wall", "Polygonum multiflorum", "Valeriana officinalis", "Achillea millefolium", "Artemisia absinthium", "Ceanothus americanus", "Dysoxylum spectabile", "Epimedium sagittatum", "Eupatorium purpureum", "Hamamelis virginiana", "Hypericum perforatum", "Hyssopus officinalis", "Macrocystis pyrifera", "Magnolia officinalis", "Passiflora incarnata", "Pelargonium sidoides", "Polygonum cuspidatum", "Polyporus umbellatus", "Pomaderris kumerahou", "Schisandra chinensis", "Symphytum officinale", "Tabebuia avellanedae", "Tanacetum parthenium", "Taraxacum officinale", "Veronica salicifolia", "Viburnum prunifolium", "Agrimonia eupatoria", "Alchemilla vulgaris", "Althaea officinalis", "Armoracia rusticana", "Codonopsis pilosula", "Cordyceps militaris", "Eucalyptus globulus", "Filipendula ulmaria", "Lycopus virginiclis", "Macropiper excelsum", "Matricaria recutita", "Melissa officinalis", "Momordica charantia", "Panax quinquefolium", "Phytolacca decandra", "Plantago lanceolata", "Pomaderris kumeraho", "Rehmannia glutinosa", "Salvia miltiorrhiza", "Solidago canadensis", "Stachys officinalis", "Syzygium aromaticum", "Tremella fuciformis", "Tribulus terrestris", "Vaccinium myrtillus", "Verbena officinalis", "Zingiber officinale", "Asclepias tuberosa", "Asparagus racemosa", "Baptisia tinctoria", "Bupleurum falcatum", "Corydalis yanhusuo", "Echinacea Purpurea", "Echinacea purpurea", "Foeniculum vulgare", "Galega officinalis", "Glycyrrhiza glabra", "Hemidesmus indicus", "Hericium erinaceus", "Houttuynia cordata", "Juniperus communis", "Lomatium dissectum", "Mahonia aquifolium", "Ocimum tenuiflorum", "Paeonia lactiflora", "Piscidia piscipula", "Rabdosia rubescens", "Rehmania glutinosa", "Salvia officinalis", "Thuja occidentalis", "Trifolium pratense", "Vitex agnus-castus", "Withania somnifera", "Angelica sinensis", "Berberis vulgaris", "Californian Poppy", "Camellia sinensis", "Centella asiatica", "Chelidonium majus", "Cnicus benedictus", "Coleus forskholii", "Commiphora molmol", "Corydalis ambigua", "Dioscorea villosa", "Equisetum arvense", "Ganoderma lucidum", "Greater Celandine", "Gymnema sylvestre", "Inonotus obliquus", "Japanese knotweed", "Leonurus cardiaca", "Ligustrum lucidum", "Marrubium vulgare", "Panax notoginseng", "Pimpinella anisum", "Piper methysticum", "Podocarpus totara", "Rhamnus purshiana", "Serenoa serrulata", "Solanum aviculare", "Uncaria tomentosa", "Verbascum thapsus", "Wolfiporia hoelen", "Agropyron repens", "Albizzia lebbeck", "American Ginseng", "Apium graveolens", "Barosma betulina", "Camelia sinensis", "Cinnamomum verum", "Coprosma robusta", "Coptis chinensis", "Crataeva nurvala", "Dodonaea viscosa", "Greater Galangal", "Grifola frondosa", "Hebe salicifolia", "Hoheria populnea", "Horney Goat Weed", "Isatis tinctoria", "Jamaican Dogwood", "Kunzea ericoides", "Lentinula edodes", "Mexican Valerian", "Rheum officinale", "Ruscus aculeatus", "Shepherd's Purse", "Siberian Ginseng", "Silybum marianum", "Tropaeolum majus", "Valeriana edulis", "Zizyphus spinosa", "Actaea racemosa", "Adhatoda vasica", "Alpinia galanga", "Artemisia annua", "Bacopa monniera", "Baical Skullcap", "Black Horehound", "Butcher's Broom", "Capsicum annuum", "Cynara scolymus", "Euphorbia hirta", "Globe Artichoke", "Humulus lupulus", "Iris versicolor", "Mentha piperita", "Prunus serotina", "Pueraria lobata", "Punica granatum", "St. John's Wort", "Stellaria media", "Thymus vulgaris", "Tienchi Ginseng", "Turnera diffusa", "Viburnum opulus", "White Horehound", "Allium sativum", "Arnica montana", "Cistus incanus", "Crocus sativas", "Galium aparine", "Gentiana lutea", "Inula helenium", "Korean Ginseng", "Nigella sativa", "Phormium tenax", "Piper excelsum", "Raspberry Leaf", "Rhodiola rosea", "Sambucus nigra", "St John's Wort", "Viola tricolor", "Arctium lappa", "Ballota nigra", "Bidens cernua", "Burr Marigold", "Curcuma longa", "Ginkgo biloba", "Glossy Privet", "Horsechestnut", "Juglans nigra", "Lady's Mantle", "Olea europaea", "Panax ginseng", "Passionflower", "Pleurisy root", "Rumex crispus", "Urtica dioica", "Usnea barbata", "Andrographis", "Avena sativa", "Bitter Melon", "Black Cohosh", "Black Pepper", "Black Walnut", "Blackcurrant", "Devil's Claw", "Holy Thistle", "Milk Thistle", "Oregon Grape", "Piper nigrum", "Ribes nigrum", "Rubus idaeus", "Sarsaparilla", "Saw Palmetto", "Viscum album", "Ashwagandha", "Blue Cohosh", "Chaste Tree", "Cryptolepis", "Elderflower", "Gravel Root", "Horseradish", "Lime Flower", "Lion's Mane", "Marshmallow", "Meadowsweet", "Pelargonium", "Pomegranate", "Prickly Ash", "Rosa canina", "Wild Cherry", "Wild Indigo", "Witch Hazel", "Wood Betony", "Yellow Dock", "Astragalus", "Cat's Claw", "Codonopsis", "Couchgrass", "Elderberry", "Elecampane", "Eucalyptus", "Giant Kelp", "Goat's Rue", "Golden Rod", "Green Oats", "Heartsease", "Hemidesmus", "Holy Basil", "Houttuynia", "Lemon Balm", "Lions Mane", "Motherwort", "Nasturtium", "Olive Leaf", "Pau d'Arco", "Peppermint", "Red Clover", "Schisandra", "Sida acuta", "Wolfiporia", "Bearberry", "Black Haw", "Blue Flag", "Bugleweed", "Bupleurum", "Calendula", "Chamomile", "Chickweed", "Cordyceps", "Corydalis", "Crampbark", "Crataegus", "Dandelion", "Dong Quai", "Echinacea", "Epilobium", "Euphorbia", "Eyebright", "Fenugreek", "Gotu Kola", "Green Tea", "Grindelia", "Horsetail", "Kumarahou", "Kumerahou", "Kūmarahou", "Kūmerahou", "Liquorice", "Mistletoe", "Poke root", "Polygonum", "Rehmannia", "Shatavari", "Adhatoda", "Agaricus", "Agrimony", "Albizzia", "Angelica", "Barberry", "Bilberry", "Cinnamon", "Cleavers", "Cornsilk", "Crataeva", "Dan Shen", "Feverfew", "Harakeke", "Hawthorn", "Horopito", "Kawakawa", "Kohekohe", "Koromiko", "Lavender", "Licorice", "Ling Zhi", "Lomatium", "Magnolia", "Poroporo", "Qing Hao", "Rabdosia", "Red Root", "Rehmania", "Rhodiola", "Rosehips", "Rosemary", "Shiitake", "Skullcap", "Tanekaha", "Tremella", "Tribulus", "Turmeric", "Valerian", "Wild Yam", "Withania", "Wormwood", "Zea mays", "Zhu Ling", "Zizyphus", "Aniseed", "Boneset", "Burdock", "Cascara", "Cayenne", "Comfrey", "Damiana", "Gentian", "Gymnema", "Hoheria", "Juniper", "Maitake", "Mullein", "Nigella", "Rhubarb", "Ribwort", "Saffron", "Vervain", "Akeake", "Arnica", "Bacopa", "Celery", "Cistus", "Coleus", "Coptis", "Fennel", "Garlic", "Ginger", "Ginkgo", "Hoelen", "Hyssop", "Isatis", "Kanuka", "Karamu", "Kānuka", "Manuka", "Mānuka", "Nettle", "Paeony", "Reishi", "Smilax", "Totara", "Tōtara", "Willow", "Yarrow", "Buchu", "Chaga", "Clove", "Elder", "Kudzu", "Myrrh", "Olive", "Salix", "Thuja", "Thyme", "Tilia", "Usnea", "Hops", "Kava", "Oats", "Rata", "Rātā", "Sage", "Sida"];
+  var HERB_ALT = HERB_NAMES.map(function (n) {
+    return n.replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&").replace(/'/g, "['\u2019]").replace(/ /g, "\\s+");
+  }).join("|");
+  // A sentence starts at the start of a line (after any list marker) or after . ! ? or : (and any closing quote or bracket)
+  var HERB_LEAD = "(?:^[ \\t\\u00a0\\u200b\\ufeff]*(?:(?:\\d{1,3}|[A-Za-z])[.)][ \\t]+|[\\u2022\\u25aa\\u25cf\\u25e6*\\u2013\\u2014-][ \\t]*)?" +
+    "|(?<=[.!?:]\\s)|(?<=[.!?:]\\s\\s)|(?<=[.!?:][\\u201d\"\\u2019')\\]]\\s)|(?<=[.!?:][\\u201d\"\\u2019')\\]]\\s\\s))";
+  var HERB_IS = new RegExp(HERB_LEAD + "[\\u201c\"\\u2018'(\\[]?(" + HERB_ALT +
+    ")(?:[ \\t]*\\([^)\\n]{1,80}\\))?(?:[ \\t]+(?:roots?|leaf|leaves|flowers?|berry|berries|bark|seeds?|herb|oil|extract|plant)){0,2}[ \\t]+is\\b", "gim");
+  var HERB_IS_ANY = new RegExp("\\b(" + HERB_ALT + ")(?:[ \\t]*\\([^)\\n]{1,80}\\))?(?:[ \\t]+(?:roots?|leaf|leaves|flowers?|berry|berries|bark|seeds?|herb|oil|extract|plant)){0,2}[ \\t]+is\\b", "gi");
+  var AU_ORDER_ADULT = ["always read the label", "if symptoms persist", "if coughing persists", "not to be used in children under 2",
+    "not suitable for infants", "contains alcohol", "contains sugars", "do not use if", "keep out of reach", "store below 30"];
+  var AU_ORDER_CHILD = ["always read the label", "not to be used in children under 2", "not suitable for infants",
+    "if symptoms persist", "if coughing persists", "contains alcohol", "contains sugars", "do not use if",
+    "keep out of reach", "store below 30"];
+  var ABBREV = { eg: 1, ie: 1, dr: 1, mr: 1, mrs: 1, ms: 1, st: 1, no: 1, vs: 1, approx: 1, etc: 1, ltd: 1, pty: 1, inc: 1, co: 1 };
+
+  function lineOf(text, pos) {
+    var n = 1;
+    for (var i = 0; i < pos && i < text.length; i++) if (text.charCodeAt(i) === 10) n++;
+    return n;
+  }
+
+  function each(re, text, fn) {
+    re.lastIndex = 0;
+    var m;
+    while ((m = re.exec(text)) !== null) {
+      if (m[0].length === 0) { re.lastIndex++; continue; }
+      fn(m);
+    }
+  }
+
+  function scan(text, ctype, opts) {
+    opts = opts || {};
+    var spacingOk = opts.spacingOk !== false;
+    var found = [];
+
+    function hit(rule, kind, start, end, advice, replacement, safe) {
+      var f = { start: start, end: Math.min(end, text.length), rule: rule, kind: kind, line: lineOf(text, start),
+        found: text.slice(start, Math.min(end, text.length)), advice: advice, edits: [], suggest: null };
+      if (typeof replacement === "string" && replacement !== f.found) {
+        var e = { start: start, end: f.end, text: replacement };
+        if (kind === "FIX" && safe !== false) f.edits.push(e); else f.suggest = e;
+      }
+      found.push(f);
+      return f;
+    }
+    function missing(rule, kind, advice, add) {
+      var f = { start: -1, end: -1, rule: rule, kind: kind, line: 0, found: "", advice: advice, edits: [], suggest: null, missing: true };
+      if (add) f.suggest = { start: text.length, end: text.length, text: (/\n$/.test(text) || !text ? "" : "\n") + add };
+      found.push(f);
+    }
+
+    RULES.forEach(function (r) {
+      if (!has(r.types, ctype)) return;
+      each(r.re, text, function (m) {
+        hit(r.rule, r.kind, m.index, m.index + m[0].length, r.advice, r.fix ? r.fix(m[0], ctype) : null, r.safe);
+      });
+    });
+
+    // G12 -ize / -yze endings
+    each(/\b[A-Za-z]+(?:iz|yz)(?:e|es|ed|ing|ation|ations|er|ers)\b/g, text, function (m) {
+      if (!IZE_EXEMPT[m[0].toLowerCase()]) {
+        var rep = m[0].replace(/([iyIY])([zZ])(e|es|ed|ing|ation|ations|er|ers)$/i, function (_, a, z, suf) {
+          return a + (z === "Z" ? "S" : "s") + suf;
+        });
+        hit("G12", "FIX", m.index, m.index + m[0].length, "British English: -ise / -yse (eg organise, analyse)", rep);
+      }
+    });
+
+    // G8 sentences starting with "Is" (questions are left alone)
+    each(/(?:^|(?<=[.!?:]\s)|(?<=[.!?:]\s\s))\s*Is\b/gm, text, function (m) {
+      var rest = text.slice(m.index + m[0].length);
+      var e = rest.match(/[.!?\n]/);
+      if (!(e && e[0] === "?")) {
+        var s = m.index + m[0].length - 2;
+        hit("G8", "FIX", s, s + 2, "do not start sentences or herb descriptions with 'Is'");
+      }
+    });
+
+    // G8 a sentence that opens with a herb name followed by "is" (eg Kawakawa is ...)
+    var herbStarts = {};
+    each(HERB_IS, text, function (m) {
+      var s = m.index + m[0].indexOf(m[1]);
+      herbStarts[s] = true;
+      hit("G8", "FIX", s, m.index + m[0].length, "do not open a sentence or herb description with the herb name followed by 'is' (eg Kawakawa is): rewrite the opening");
+    });
+    // Style note: the same herb-name-then-is phrasing in the middle of a sentence
+    each(HERB_IS_ANY, text, function (m) {
+      if (herbStarts[m.index]) return;
+      var f = hit("G8", "STYLE", m.index, m.index + m[0].length, "a herb name followed by 'is' mid-sentence reads as lazy: not a breach, but worth rewording");
+      f.name = "Lazy phrasing";
+    });
+
+    // G6 Oxford comma: comma before the final and/or of a list
+    each(/,\s(?:and|or)\s/g, text, function (m) {
+      var st = -1;
+      [".", "!", "?", "\n", ":", ";"].forEach(function (c) { st = Math.max(st, text.lastIndexOf(c, m.index - 1)); });
+      if (text.slice(st + 1, m.index).indexOf(",") >= 0) {
+        hit("G6", "CHECK", m.index, m.index + 1, "no Oxford comma before the final 'and' / 'or' in a list", "");
+      }
+    });
+
+    // G9 address postcodes
+    each(/16 Charann Place,?\s*(?:Avondale,?\s*)?Auckland(?!\s*1026)/g, text, function (m) {
+      hit("G9", "FIX", m.index, m.index + m[0].length, "include the postcode: Auckland 1026", "16 Charann Place, Auckland 1026", false);
+    });
+    each(/Charann Place,?\s*Avondale|189 Kent Street,?\s*Sydney/g, text, function (m) {
+      hit("G9", "CHECK", m.index, m.index + m[0].length, "suburb or city not required (Auckland 1026 / NSW 2000)");
+    });
+    each(/189 Kent Street(?![,\s]*(?:Sydney[,\s]*)?NSW 2000)/g, text, function (m) {
+      hit("G9", "FIX", m.index, m.index + m[0].length, "include NSW 2000");
+    });
+
+    // G16 website addresses
+    each(/\b(?:www\.)?(?:kiwiherb|phytomed|phytomade)\.co\.nz\b/gi, text, function (m) {
+      var s = m[0];
+      if (s.toLowerCase().indexOf("www.") === 0 || s !== s.toLowerCase()) {
+        hit("G16", "FIX", m.index, m.index + s.length, "lower case, no www (eg kiwiherb.co.nz)", s.toLowerCase().replace(/^www\./, ""));
+      }
+    });
+
+    // G5b two spaces after full stops (one finding, every location marked)
+    if (has(TWO_SPACES, ctype) && spacingOk) {
+      var singles = [];
+      each(/([A-Za-z0-9%)\]’”"']+)([.!?])[’”"')]? (?! )(?=[“"'(]?[A-Z])/g, text, function (m) {
+        if (!ABBREV[m[1].toLowerCase()]) singles.push(m);
+      });
+      if (singles.length) {
+        var kind = has(["document", "pos"], ctype) ? "FIX" : "CHECK";
+        var first = singles[0];
+        var f = hit("G5", kind, first.index, first.index + first[0].length,
+          "two spaces after full stops in documents and packaging (one space allowed where packaging space is tight)");
+        f.count = singles.length;
+        f.locs = [];
+        singles.forEach(function (m) {
+          var sp = m.index + m[0].length - 1;
+          f.locs.push([sp - 1, sp + 1]);
+          if (kind === "FIX") f.edits.push({ start: sp, end: sp + 1, text: "  " });
+        });
+      }
+    }
+
+    // S1 acute before maintenance
+    var a = text.search(/\bAcute\b/), mt = text.search(/\bMaintenance\b/);
+    if (has(PACK.concat(["web", "pos"]), ctype) && a >= 0 && mt >= 0 && mt < a) {
+      hit("S1", "FIX", mt, mt + "Maintenance".length, "list the Acute dose before the Maintenance dose");
+    }
+
+    // S5 Latin binomials: only the first word capitalised
+    each(new RegExp("\\b(" + LATIN + ")[ \\u00a0]+([A-Z][a-z]{3,}(?:-[a-z]+)?)\\b", "g"), text, function (m) {
+      var ep = m[2];
+      if (EPITHET_STOP.indexOf(ep) < 0 && !LATIN_FULL.test(ep) && EPITHET_END.test(ep.toLowerCase())) {
+        hit("S5", "CHECK", m.index, m.index + m[0].length,
+          "botanical names: only the first word capitalised (" + m[1] + " " + ep.toLowerCase() + ")",
+          m[0].replace(ep, ep.toLowerCase()));
+      }
+    });
+
+    // S8 named flavours need Natural first
+    each(/\bFlavours?\b/g, text, function (m) {
+      if (!/natural\b/i.test(text.slice(Math.max(0, m.index - 40), m.index))) {
+        hit("S8", "CHECK", m.index, m.index + m[0].length, "named flavours need Natural first (eg Natural Strawberry Flavour)");
+      }
+    });
+
+    // S11 health professional line: exact wording, and presence where required
+    each(/[ÏI]f\s+symptoms\s+(?:persist|continue)[^.\n]{0,70}\.?/gi, text, function (m) {
+      var s = m[0].trim();
+      if (s !== HP_EXACT) {
+        var safe = /\.$/.test(s) && s.length < 90 && m[0] === s;
+        hit("S11", "FIX", m.index, m.index + m[0].length, "use the exact wording: " + HP_EXACT, safe ? HP_EXACT : null);
+      }
+    });
+    if (has(NEEDS_HP_LINE, ctype) && !/if\s+symptoms\s+persist/i.test(text)) {
+      missing("S11", "FIX", "must appear on all packaging, POS and social: " + HP_EXACT, ctype === "packaging-au" ? null : HP_EXACT);
+    }
+
+    // S17 shake well (liquids)
+    if (has(PACK, ctype) && /\d\s?mL\b/.test(text) && !/shake (?:well|vigorously) before use/i.test(text)) {
+      missing("S17", "CHECK", "liquids: Directions must include 'Shake well before use.'");
+    }
+
+    // S21 pregnancy and breastfeeding statements
+    var allowed = ["Not recommended during pregnancy or breastfeeding.", "Suitable for use while pregnant and breastfeeding."];
+    if (has(PACK.concat(["pos", "web", "document"]), ctype)) {
+      each(/[^.!?\n]*(?:pregnan|breast-?feed|lactat)[^.!?\n]*[.!?]?/gi, text, function (m) {
+        var raw = m[0], s = raw.trim(), off = raw.indexOf(s);
+        if (s && s.length <= 90 && s.slice(-1) !== "?" && allowed.indexOf(s) < 0) {
+          hit("S21", "CHECK", m.index + off, m.index + off + s.length, "use the standard wording: " + allowed.join(" / "));
+        }
+        if (ctype === "packaging-au" && s.indexOf("Suitable for use while pregnant") === 0) {
+          hit("S21", "FIX", m.index + off, m.index + off + s.length, "AU packaging: leave the 'suitable' statement off", "", false);
+        }
+      });
+    }
+
+    // Australia: required statements and warning order
+    if (ctype === "packaging-au") {
+      var low = text.toLowerCase();
+      if (low.indexOf("always read the label and use as directed") < 0) missing("A1", "FIX", "all AU boxes and labels: 'Always read the label and use as directed.'");
+      if (low.indexOf("do not use if carton seal is missing or broken") < 0) missing("A1", "CHECK", "AU boxes: 'Do not use if carton seal is missing or broken.'");
+      if (/\d\s?mL\b/.test(text) && low.indexOf("cap seal on bottle is broken") < 0) missing("A1", "CHECK", "AU liquids: 'Do not use if cap seal on bottle is broken.'");
+      if (low.indexOf("cough") >= 0 && low.indexOf("if coughing persists, consult your doctor") < 0) missing("A1", "CHECK", "where applicable: 'If coughing persists, consult your doctor.'");
+      var cn = text.search(/contains no\b/i), A13 = "CONTAINS NO artificial flavours, sweeteners, colours or preservatives.";
+      if (cn >= 0 && text.indexOf(A13) < 0) {
+        var stop = text.indexOf(".", cn), endA = stop >= 0 && stop - cn < 140 ? stop + 1 : cn + 11;
+        hit("A13", "FIX", cn, endA, "use: " + A13 + " (CONTAINS NO in bold capitals)", stop >= 0 && stop - cn < 140 ? A13 : null, false);
+      }
+      each(/\b(?:ALWAYS READ THE LABEL|IF SYMPTOMS PERSIST|KEEP OUT OF REACH|DO NOT USE IF|STORE BELOW|NOT TO BE USED|NOT SUITABLE FOR)\b/g, text, function (m) {
+        var stop = text.indexOf(".", m.index + m[0].length), endC = stop >= 0 && stop - m.index < 160 ? stop + 1 : m.index + m[0].length;
+        var s = text.slice(m.index, endC), lower = s.toLowerCase();
+        hit("A1", "FIX", m.index, endC, "AU warnings are not in capitals (or bold)",
+          lower.charAt(0).toUpperCase() + lower.slice(1).replace(/\bmanuka\b/g, "mānuka").replace(/\baust l\b/g, "AUST L"), false);
+      });
+      each(/\bhoney\b(?!\s*\()/gi, text, function (m) {
+        hit("A14", "CHECK", m.index, m.index + m[0].length, "ingredients: name the honey type, eg Honey (Mānuka and Thyme)");
+      });
+      var seen = [];
+      AU_ORDER_ADULT.forEach(function (k) { var p = low.indexOf(k); if (p >= 0) seen.push([p, k]); });
+      seen.sort(function (x, y) { return x[0] - y[0]; });
+      var order = seen.map(function (s) { return s[1]; });
+      var fits = function (ref) { return ref.filter(function (k) { return order.indexOf(k) >= 0; }).join("|") === order.join("|"); };
+      if (order.length > 1 && !(fits(AU_ORDER_ADULT) || fits(AU_ORDER_CHILD))) {
+        var f2 = hit("A2", "FIX", seen[0][0], seen[0][0] + seen[0][1].length, "warnings are out of order: see A2 (adults) or A3 (children)");
+        f2.found = order.join(" > ");
+      }
+    }
+
+    // A dash between two numbers is a range (S16 fixes it), so no comma suggestion there
+    found.forEach(function (f) {
+      if (f.rule === "HOUSE" && f.suggest && /\d/.test(text.charAt(f.start - 1)) && /\d/.test(text.charAt(f.end))) f.suggest = null;
+    });
+    found.sort(function (x, y) { return (x.start - y.start) || (x.rule < y.rule ? -1 : x.rule > y.rule ? 1 : 0); });
+    return found;
+  }
+
+  // Apply every non-overlapping automatic edit. Returns {text, applied}.
+  function applyFixes(text, findings) {
+    var edits = [];
+    findings.forEach(function (f) { if (f.kind === "FIX") f.edits.forEach(function (e) { edits.push(e); }); });
+    edits.sort(function (x, y) { return (x.start - y.start) || ((y.end - y.start) - (x.end - x.start)); });
+    var out = "", pos = 0, applied = 0;
+    edits.forEach(function (e) {
+      if (e.start < pos) return;
+      out += text.slice(pos, e.start) + e.text;
+      pos = e.end;
+      applied++;
+    });
+    return { text: out + text.slice(pos), applied: applied };
+  }
+
+  function countFixable(findings) {
+    var n = 0;
+    findings.forEach(function (f) { if (f.kind === "FIX") n += f.edits.length; });
+    return n;
+  }
+
+  return { scan: scan, applyFixes: applyFixes, countFixable: countFixable, TYPES: ALL, HP_EXACT: HP_EXACT,
+    HERB_NAMES: HERB_NAMES.slice(), GENERA: LATIN.split("|") };
+})();
+
+if (typeof module !== "undefined") module.exports = MandatoriesEngine;
+
+</script>
+<script>
+window.KIWIHERB_VERSION = "1.0";
+window.KIWIHERB_BOTANICAL = ["Achillea millefolium", "Actaea racemosa", "Adhatoda vasica", "Aesculus hippocastanum", "Agaricus subrufescens", "Agrimonia eupatoria", "Agropyron repens", "Albizzia lebbeck", "Alchemilla vulgaris", "Allium sativum", "Alpinia galanga", "Althaea officinalis", "Andrographis paniculata", "Angelica archangelica", "Angelica sinensis", "Apium graveolens", "Arctium lappa", "Arctostaphylos uva-ursi", "Armoracia rusticana", "Arnica montana", "Artemisia absinthium", "Artemisia annua", "Asclepias tuberosa", "Asparagus racemosa", "Astragalus membranaceous", "Avena sativa", "Bacopa monniera", "Ballota nigra", "Baptisia tinctoria", "Barosma betulina", "Berberis vulgaris", "Bidens cernua", "Bupleurum falcatum", "Calendula officinalis", "Camelia sinensis", "Camellia sinensis", "Capsella bursa-pastoris", "Capsicum annuum", "Caulophyllum thalictroides", "Ceanothus americanus", "Centella asiatica", "Chelidonium majus", "Cinnamomum verum", "Cistus incanus", "Cnicus benedictus", "Codonopsis pilosula", "Coleus forskholii", "Commiphora molmol", "Coprosma robusta", "Coptis chinensis", "Cordyceps militaris", "Corydalis ambigua", "Corydalis yanhusuo", "Crataeva nurvala", "Crocus sativas", "Cryptolepis sanguinolenta", "Curcuma longa", "Cynara scolymus", "Dioscorea villosa", "Dodonaea viscosa", "Dysoxylum spectabile", "Echinacea angustifolia", "Echinacea purpurea", "Eleutherococcus senticosus", "Epilobium parviflorum", "Epimedium sagittatum", "Equisetum arvense", "Eschscholtzia californica", "Eucalyptus globulus", "Eupatorium perfoliatum", "Eupatorium purpureum", "Euphorbia hirta", "Euphrasia officinalis", "Filipendula ulmaria", "Foeniculum vulgare", "Galega officinalis", "Galium aparine", "Ganoderma lucidum", "Gentiana lutea", "Ginkgo biloba", "Glycyrrhiza glabra", "Grifola frondosa", "Gymnema sylvestre", "Hamamelis virginiana", "Harpagophytum procumbens", "Hebe salicifolia", "Hemidesmus indicus", "Hericium erinaceus", "Hoheria populnea", "Houttuynia cordata", "Humulus lupulus", "Hypericum perforatum", "Hyssopus officinalis", "Inonotus obliquus", "Inula helenium", "Iris versicolor", "Isatis tinctoria", "Juglans nigra", "Juniperus communis", "Kunzea ericoides", "Lavandula officinalis", "Lentinula edodes", "Leonurus cardiaca", "Leptospermum scoparium", "Ligustrum lucidum", "Lomatium dissectum", "Lycopus virginiclis", "Macrocystis pyrifera", "Macropiper excelsum", "Magnolia officinalis", "Mahonia aquifolium", "Marrubium vulgare", "Matricaria chamomilla", "Matricaria recutita", "Melissa officinalis", "Mentha piperita", "Momordica charantia", "Nigella sativa", "Ocimum tenuiflorum", "Olea europaea", "Paeonia lactiflora", "Panax ginseng", "Panax notoginseng", "Panax quinquefolium", "Parietaria officinalis", "Passiflora incarnata", "Pelargonium sidoides", "Phormium tenax", "Phyllocladus trichomanoides", "Phytolacca decandra", "Pimpinella anisum", "Piper excelsum", "Piper methysticum", "Piper nigrum", "Piscidia piscipula", "Plantago lanceolata", "Podocarpus totara", "Polygonum cuspidatum", "Polygonum multiflorum", "Polyporus umbellatus", "Pomaderris kumeraho", "Pomaderris kumerahou", "Prunus serotina", "Pseudowintera colorata", "Pueraria lobata", "Punica granatum", "Rabdosia rubescens", "Rehmania glutinosa", "Rehmannia glutinosa", "Rhamnus purshiana", "Rheum officinale", "Rhodiola rosea", "Ribes nigrum", "Rosa canina", "Rosmarinus officinalis", "Rubus idaeus", "Rumex crispus", "Ruscus aculeatus", "Salvia miltiorrhiza", "Salvia officinalis", "Sambucus nigra", "Schisandra chinensis", "Scutellaria baicalensis", "Scutellaria lateriflora", "Serenoa serrulata", "Sida acuta", "Silybum marianum", "Solanum aviculare", "Solidago canadensis", "Stachys officinalis", "Stellaria media", "Symphytum officinale", "Syzygium aromaticum", "Tabebuia avellanedae", "Tanacetum parthenium", "Taraxacum officinale", "Thuja occidentalis", "Thymus vulgaris", "Trametes versicolor", "Tremella fuciformis", "Tribulus terrestris", "Trifolium pratense", "Trigonella foenum-graecum", "Tropaeolum majus", "Turnera diffusa", "Uncaria tomentosa", "Urtica dioica", "Usnea barbata", "Vaccinium myrtillus", "Valeriana edulis", "Valeriana officinalis", "Verbascum thapsus", "Verbena officinalis", "Veronica salicifolia", "Viburnum opulus", "Viburnum prunifolium", "Viola tricolor", "Viscum album", "Vitex agnus-castus", "Withania somnifera", "Wolfiporia hoelen", "Zanthoxylum clava-herculis", "Zea mays", "Zingiber officinale", "Zizyphus spinosa"];
+</script>
+<script>
+/* Kiwiherb mandatories: Word side panel.
+   Reads the open document, runs the same checks as the web page (MandatoriesEngine), adds the checks only
+   Word can do (heading styles, italics, bold), and selects, fixes or comments on each issue in the document. */
+(function () {
+  "use strict";
+  var E = window.MandatoriesEngine;
+  var BOTANICAL = window.KIWIHERB_BOTANICAL || [];
+  var VERSION = window.KIWIHERB_VERSION || "1.0";
+  var PREFIX = "Mandatories check";
+  var CHUNK = 120;
+  var NOT_FOUND = "Word could not find that text. If it has tracked changes, accept or reject them, then choose Check document.";
+
+  var TYPE_LABEL = {
+    "document": "a Word document", "web": "a web page or email", "social": "a social post", "pos": "POS or print",
+    "packaging-nz": "New Zealand packaging", "packaging-au": "Australian packaging"
+  };
+  var RULE_NAME = {
+    G1: "Capitals", G2: "te reo M\u0101ori", G3: "QR code", G4: "Warnings layout", G5: "Full stops", G6: "Oxford comma",
+    G7: "And, not &", G8: "Opening with is", G9: "Address", G10: "Limited", G11: "eg and ie", G12: "British English",
+    G13: "Fern motif", G14: "Headings", G15: "New Zealand in full", G16: "Website",
+    S1: "Acute before Maintenance", S2: "Purified water", S3: "Roundels", S4: "Capsules", S5: "Botanical names",
+    S6: "Dosage format", S7: "Dosage order", S8: "Natural flavour", S9: "Units and numbers", S10: "Glycerol",
+    S11: "Health professional line", S12: "Hops", S13: "Maximum dose", S14: "mL", S15: "Mucus or mucous", S16: "Ranges",
+    S17: "Shake well", S18: "Years", S19: "Organic Beeswax", S20: "Hyphens and word forms",
+    S21: "Pregnancy and breastfeeding", S22: "Directions",
+    A1: "Australian warnings", A2: "Warning order", A3: "Children's warning order", A4: "AUST L", A5: "Dose basis",
+    A6: "Ingredient capitals", A7: "Directions comma", A8: "Microlitres", A9: "Ingredients panel", A10: "Ingredient brackets",
+    A11: "Please recycle", A12: "In a base of", A13: "Contains no", A14: "Honey type", A15: "From, not derived from",
+    HOUSE: "Dashes"
+  };
+  var ALLT = ["document", "web", "social", "pos", "packaging-nz", "packaging-au"];
+  var PACKT = ["packaging-nz", "packaging-au"];
+  var HEADING_TYPES = ["document", "web", "pos", "packaging-nz", "packaging-au"];
+  var EYE = [
+    ["G1", "Product names keep every word capitalised (Peppermint Oil). Supplier brands keep their own styling.", ALLT],
+    ["G14", "Headings that use Word's heading styles are checked automatically. Check any other headings by eye: sentence case, eg Main indications.", HEADING_TYPES],
+    ["G5", "Full stops on full sentences only, not on short fragments or bullet fragments.", ALLT],
+    ["S5", "Marketing and education: common name first. Packaging: botanical name first. (Italics are checked automatically for the herbs on the list.)", ALLT],
+    ["S5", "Front label or carton: full botanical name only, with no common name in brackets.", ["packaging-au"]],
+    ["S7", "Dosage order: children's products youngest to oldest; family and adult range Adults, then Children.", HEADING_TYPES],
+    ["S13", "Any daily maximum comes after the last dose (Max of 2 daily).", ["document", "web", "packaging-nz", "packaging-au"]],
+    ["S9", "One unit across the ingredient list, mg or g.", ["document", "web", "packaging-nz", "packaging-au"]],
+    ["G4", "Each warning starts on a new line (small formats such as balms may run them together).", ["document", "pos", "packaging-nz"]],
+    ["S21", "Pregnancy and breastfeeding wording matches the standard statement for the market.", ["document", "packaging-nz", "packaging-au"]],
+    ["S17", "Liquids: Directions include \"Shake well before use.\"", PACKT],
+    ["S22", "Small panels say Directions, not Dosage.", PACKT],
+    ["G3", "QR code on cartons, right of the barcode, 1.25 to 1.5 cm square (1 cm minimum on small formats).", ["pos", "packaging-nz", "packaging-au"]],
+    ["G13", "Fern logo above Made in New Zealand with about a 3 mm gap (2 mm on small formats), and no Kiwi NZ made logo.", PACKT],
+    ["S11", "The health professional line appears on the graphic or in the caption.", ["social", "pos"]],
+    ["G7", "Any & on social has been approved.", ["social"]],
+    ["A1", "Warnings run together rather than one per line and are not in capitals or bold (bold is checked automatically for the standard warnings).", ["packaging-au"]],
+    ["A2", "Warning order matches the adult (A2) or children's (A3) order.", ["packaging-au"]],
+    ["A4", "AUST L is white on high-contrast backgrounds and black on white.", ["packaging-au"]],
+    ["A5", "Dose basis: Each mL for children's products, the minimum dose for adult liquids, Each gram for topicals, Each capsule for capsules.", ["packaging-au"]],
+    ["A6", "Ingredient names capitalised in \"In a base of\" (Oil too), but not in \"Contains sugars as honey.\"", ["packaging-au"]],
+    ["A9", "Ingredients box in the right panel (left only where space is tight).", ["packaging-au"]]
+  ];
+
+  // Words that keep a capital inside a sentence-case heading
+  var PROPER = {};
+  ("Kiwiherb Phytomed Phytomade Wellmune Medsafe New Zealand Zealander Zealanders Australia Australian Australians Aotearoa " +
+    "Auckland Avondale Sydney M\u0101ori Maori English British I St John Christmas Easter " +
+    "January February March April June July August September October November December " +
+    "Monday Tuesday Wednesday Thursday Friday Saturday Sunday").split(" ").forEach(function (w) { PROPER[w] = 1; });
+  (E ? E.GENERA : []).forEach(function (g) { PROPER[g] = 1; });
+  BOTANICAL.forEach(function (n) { PROPER[n.split(" ")[0]] = 1; });
+
+  var BOT_RE = BOTANICAL.length ? new RegExp("\\b(?:" + BOTANICAL.slice().sort(function (a, b) { return b.length - a.length; }).map(function (n) {
+    return n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/ /g, "[ \\u00a0]+");
+  }).join("|") + ")\\b", "gi") : null;
+  var AU_WARN = /\b(?:always read the label|if symptoms persist|if coughing persists|keep out of reach|do not use if|store below|not to be used|not suitable for)\b/gi;
+  var UNSAFE = /[\u0000-\u0008\u000e-\u001d]/;
+
+  var state = {
+    type: "document", busy: false, model: null, findings: [], visible: [], byN: {}, ignored: {},
+    openKey: "", note: "", noteKind: "", focusN: 0, track: false, docTracking: "Off", checked: false, loc: {},
+    api: { w13: false, w14: false, reviewed: true }
+  };
+  var els = {};
+  function $(id) { return document.getElementById(id); }
+
+  // ---------- small helpers ----------
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[c]; });
+  }
+  function oneLine(s) { return String(s).replace(/\s*\n\s*/g, " / "); }
+  function shorten(s, n) { s = oneLine(s); return s.length > n ? s.slice(0, n - 1) + "\u2026" : s; }
+  function plural(n, one, many) { return n + " " + (n === 1 ? one : many); }
+  function sentence(s) { s = s.charAt(0).toUpperCase() + s.slice(1); return /[.?!)]$/.test(s) ? s : s + "."; }
+  function quoted(s, n) { return "\u201c" + esc(shorten(s, n || 34)) + "\u201d"; }
+  function kindOf(f) { return f.kind === "FIX" ? "fix" : f.kind === "STYLE" ? "style" : "check"; }
+  function nameOf(f) { return f.name || RULE_NAME[f.rule] || f.rule; }
+  function changesOf(f) { return f.edits.length ? f.edits : (f.suggest ? [f.suggest] : []); }
+  function canFix(f) { return !!(f.format || (f.missing ? f.suggest : changesOf(f).length)); }
+  function normText(s) { return String(s).replace(/[\u000b\u000c\r\n\u0007]/g, "\n"); }
+  function eachMatch(re, text, fn) {
+    re.lastIndex = 0;
+    var m;
+    while ((m = re.exec(text)) !== null) { if (!m[0].length) { re.lastIndex++; continue; } fn(m); }
+  }
+  function note(msg, kind) { state.note = msg; state.noteKind = kind || ""; }
+  function docName() {
+    try { var u = Office.context.document.url || ""; return decodeURIComponent(u.split(/[\\/]/).pop() || ""); } catch (e) { return ""; }
+  }
+
+  // ---------- reading the document ----------
+  function isHeading(p) {
+    var b = "", s = "";
+    if (state.api.w13) { try { b = p.styleBuiltIn || ""; } catch (e) { b = ""; } }
+    if (/^Heading[1-9]$/.test(b)) return true;
+    try { s = p.style || ""; } catch (e) { s = ""; }
+    return /^heading\s*[1-9]$/i.test(s);
+  }
+
+  async function readDoc(ctx) {
+    var paras = ctx.document.body.paragraphs;
+    paras.load(state.api.w13 ? "text,style,styleBuiltIn" : "text,style");
+    await ctx.sync();
+    var items = paras.items, reviewed = null;
+    // Track changes: read the mode and each paragraph's current text (without tracked deletions).
+    // If this Word will not do that, carry on with plain text and leave the tracked changes option off.
+    if (state.api.w14) {
+      try {
+        ctx.document.load("changeTrackingMode");
+        if (state.api.reviewed) reviewed = items.map(function (p) { return p.getReviewedText("Current"); });
+        await ctx.sync();
+        state.docTracking = ctx.document.changeTrackingMode;
+      } catch (e) {
+        state.api.w14 = false;
+        state.api.reviewed = false;
+        state.docTracking = "Off";
+        reviewed = null;
+      }
+    }
+    var m = { items: items, paras: [], text: "" }, parts = [], pos = 0;
+    items.forEach(function (p, i) {
+      var raw = p.text, tracked = false;
+      if (reviewed) {
+        var cur = reviewed[i].value;
+        if (typeof cur === "string" && normText(cur) !== normText(raw)) { raw = cur; tracked = true; }
+      }
+      var n = normText(raw);
+      m.paras.push({ i: i, raw: raw, start: pos, len: n.length, heading: isHeading(p), tracked: tracked });
+      parts.push(n);
+      pos += n.length + 1;
+    });
+    m.text = parts.join("\n");
+    return m;
+  }
+
+  function paraAt(m, pos) {
+    var lo = 0, hi = m.paras.length - 1;
+    while (lo < hi) {
+      var mid = (lo + hi + 1) >> 1;
+      if (m.paras[mid].start <= pos) lo = mid; else hi = mid - 1;
+    }
+    return lo;
+  }
+  function paraEnd(m, p) { return m.paras[p].start + m.paras[p].len; }
+  function isSep(m, i) { return i < m.text.length && i === paraEnd(m, paraAt(m, i)); }
+  function crosses(m, s, e) {
+    if (e <= s) return false;
+    return paraAt(m, s) !== paraAt(m, e - 1) || isSep(m, s) || isSep(m, e - 1);
+  }
+
+  // ---------- checking ----------
+  // Trim whitespace that only spills into a neighbouring paragraph; anything else that crosses paragraphs is edited by hand.
+  function clipFinding(m, f) {
+    if (f.missing) return f;
+    var s = f.start, e = f.end, t = m.text, os = f.start, oe = f.end;
+    while (e > s && crosses(m, s, e) && /\s/.test(t.charAt(e - 1))) e--;
+    while (e > s && crosses(m, s, e) && /\s/.test(t.charAt(s))) s++;
+    if (crosses(m, s, e)) {
+      f.span = true;
+      f.edits = [];
+      f.suggest = null;
+      return f;
+    }
+    if (s !== os || e !== oe) {
+      f.start = s;
+      f.end = e;
+      if (f.rule !== "A2") f.found = t.slice(s, e);
+      f.edits.forEach(function (x) { if (x.start === os && x.end === oe) { x.start = s; x.end = e; } });
+      if (f.suggest && f.suggest.start === os && f.suggest.end === oe) { f.suggest.start = s; f.suggest.end = e; }
+    }
+    f.edits = f.edits.filter(function (x) { return !crosses(m, x.start, x.end); });
+    if (f.suggest && crosses(m, f.suggest.start, f.suggest.end)) f.suggest = null;
+    return f;
+  }
+
+  // G14: headings in Word heading styles should be sentence case
+  function headingChecks(m, t) {
+    if (HEADING_TYPES.indexOf(t) < 0) return [];
+    var out = [];
+    m.paras.forEach(function (P) {
+      if (!P.heading) return;
+      var text = normText(P.raw), edits = [], re = /[A-Za-z\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u017f]+(?:['\u2019][A-Za-z]+)?/g, w, first = true, last = 0;
+      while ((w = re.exec(text)) !== null) {
+        var word = w[0], gap = text.slice(last, w.index);
+        last = w.index + word.length;
+        if (/[.:!?]/.test(gap)) first = true;
+        if (first) { first = false; continue; }
+        if (!/^[A-Z\u00c0-\u00de\u0100-\u017f]/.test(word) || word.charAt(0) === word.charAt(0).toLowerCase()) continue;
+        var letters = word.replace(/['\u2019].*$/, "");
+        if (letters.length > 1 && letters === letters.toUpperCase()) continue;
+        if (/[A-Z]/.test(letters.slice(1))) continue;
+        if (PROPER[letters] || PROPER[word]) continue;
+        edits.push({ start: P.start + w.index, end: P.start + w.index + 1, text: word.charAt(0).toLowerCase() });
+      }
+      if (edits.length) {
+        var found = text.replace(/\s+$/, "");
+        out.push({ start: P.start, end: P.start + found.length, rule: "G14", kind: "CHECK", line: 0, found: found,
+          advice: "headings are sentence case (eg Main indications): only the first word and names keep capitals",
+          edits: edits, suggest: null });
+      }
+    });
+    return out;
+  }
+
+  // S5 italics for botanical names, and the Australian bold rules (A1, A12, A13)
+  async function formatChecks(ctx, m, t) {
+    var c = [];
+    if (BOT_RE) {
+      eachMatch(BOT_RE, m.text, function (x) {
+        c.push({ rule: "S5", start: x.index, end: x.index + x[0].length, prop: "italic", want: true, advice: "botanical names are in italics" });
+      });
+    }
+    if (t === "packaging-au") {
+      eachMatch(/CONTAINS NO\b/g, m.text, function (x) {
+        c.push({ rule: "A13", start: x.index, end: x.index + x[0].length, prop: "bold", want: true, advice: "CONTAINS NO is in bold capitals" });
+      });
+      eachMatch(/\bin a base of\b/gi, m.text, function (x) {
+        c.push({ rule: "A12", start: x.index, end: x.index + x[0].length, prop: "bold", want: false, advice: "'In a base of' is not bold" });
+      });
+      eachMatch(AU_WARN, m.text, function (x) {
+        var stop = m.text.indexOf(".", x.index), pe = paraEnd(m, paraAt(m, x.index));
+        var end = stop >= 0 && stop < pe && stop - x.index < 160 ? stop + 1 : x.index + x[0].length;
+        c.push({ rule: "A1", start: x.index, end: end, prop: "bold", want: false, advice: "Australian warnings are not bold" });
+      });
+    }
+    if (!c.length) return [];
+    var ranges = await locateMany(ctx, m, c.map(function (x) { return [x.start, x.end]; }));
+    var fonts = ranges.map(function (r, i) { if (!r) return null; r.font.load(c[i].prop); return r.font; });
+    await ctx.sync();
+    var out = [];
+    c.forEach(function (x, i) {
+      if (!fonts[i]) return;
+      if (fonts[i][x.prop] === x.want) return;
+      out.push({ start: x.start, end: x.end, rule: x.rule, kind: "FIX", line: 0, found: m.text.slice(x.start, x.end),
+        advice: x.advice, edits: [], suggest: null, format: { prop: x.prop, value: x.want } });
+    });
+    return out;
+  }
+
+  async function scanAll(ctx, m) {
+    var t = state.type;
+    var fs = E.scan(m.text, t).map(function (f) { return clipFinding(m, f); });
+    fs = fs.concat(headingChecks(m, t));
+    fs = fs.concat(await formatChecks(ctx, m, t));
+    fs.forEach(function (f) { f.para = f.missing ? 0 : paraAt(m, f.start) + 1; });
+    fs.sort(function (x, y) {
+      return (x.start - y.start) || (x.end - y.end) || (x.rule < y.rule ? -1 : x.rule > y.rule ? 1 : 0) || (x.kind < y.kind ? -1 : x.kind > y.kind ? 1 : 0);
+    });
+    return fs;
+  }
+
+  function commit(m, fs) {
+    state.model = m;
+    var seen = {};
+    fs.forEach(function (f) {
+      var base = f.missing ? f.rule + "|missing|" + f.advice : f.rule + "|" + f.kind + "|" + f.found + (f.format ? "|" + f.format.prop : "");
+      seen[base] = (seen[base] || 0) + 1;
+      f.key = base + "|" + seen[base];
+    });
+    state.findings = fs;
+    state.checked = true;
+    refilter();
+  }
+  function refilter() {
+    var vis = state.findings.filter(function (f) { return !state.ignored[f.key]; });
+    vis.sort(function (a, b) { return (a.missing === b.missing ? 0 : a.missing ? -1 : 1) || (a.start - b.start) || (a.end - b.end); });
+    state.byN = {};
+    vis.forEach(function (f, i) { f.n = i + 1; state.byN[f.n] = f; });
+    state.visible = vis;
+  }
+  function findByKey(key) {
+    for (var i = 0; i < state.visible.length; i++) if (state.visible[i].key === key) return state.visible[i];
+    return null;
+  }
+  function headSig(m) { return m.paras.filter(function (p) { return p.heading; }).map(function (p) { return p.i; }).join(","); }
+
+  // Re-read the document before acting on it. If it changed since the last check, check it again first.
+  async function fresh(ctx) {
+    var m = await readDoc(ctx);
+    if (!state.model || m.text !== state.model.text || headSig(m) !== headSig(state.model)) {
+      commit(m, await scanAll(ctx, m));
+      state.changed = true;
+    } else {
+      state.model = m;
+    }
+    return m;
+  }
+
+  // ---------- finding text in Word ----------
+  function wordEscape(s) {
+    return s.replace(/\^/g, "^^").replace(/\t/g, "^t").replace(/\u00a0/g, "^s").replace(/[\u000b\n\r]/g, "^l")
+      .replace(/\f/g, "^m").replace(/\u001e/g, "^~").replace(/\u001f/g, "^-");
+  }
+  function occurrences(hay, needle) {
+    var out = [], i = 0;
+    if (!needle) return out;
+    while ((i = hay.indexOf(needle, i)) >= 0) { out.push(i); i += needle.length; }
+    return out;
+  }
+  function growLeft(raw, i) { var j = i; while (j > 0 && i - j < 30 && !/\s/.test(raw.charAt(j - 1))) j--; return j; }
+  function growRight(raw, i) { var j = i; while (j < raw.length && j - i < 30 && !/\s/.test(raw.charAt(j))) j++; return j; }
+  function spaceLeft(raw, i) { var j = i; while (j > 0 && i - j < 4 && /[ \t\u00a0]/.test(raw.charAt(j - 1))) j--; return j; }
+  function spaceRight(raw, i) { var j = i; while (j < raw.length && j - i < 4 && /[ \t\u00a0]/.test(raw.charAt(j))) j++; return j; }
+
+  // A leaf finds a span inside one paragraph: search a window of text around it (so short targets are not
+  // ambiguous), pick the right copy by counting earlier copies, then narrow the result down to the span.
+  function leaf(P, ls, le) {
+    var raw = P.raw, ws = ls, we = le;
+    if (le - ls < 12) {
+      ws = growLeft(raw, ls);
+      we = growRight(raw, le);
+      if (we - ws < 12) { ws = growLeft(raw, spaceLeft(raw, ws)); we = growRight(raw, spaceRight(raw, we)); }
+      if (UNSAFE.test(raw.slice(ws, we)) || wordEscape(raw.slice(ws, we)).length > 200) { ws = ls; we = le; }
+    }
+    var win = raw.slice(ws, we), occ = occurrences(raw, win), k = occ.indexOf(ws);
+    if (k < 0) {
+      ws = ls; we = le; win = raw.slice(ws, we); occ = occurrences(raw, win); k = occ.indexOf(ws);
+      if (k < 0) return null;
+    }
+    var out = { p: P.i, tracked: P.tracked, text: win, k: k, total: occ.length, narrow: null };
+    if (ws !== ls || we !== le) {
+      var target = raw.slice(ls, le), inner = occurrences(win, target), k2 = inner.indexOf(ls - ws);
+      if (k2 < 0) return null;
+      out.narrow = { text: target, k: k2, total: inner.length };
+    }
+    return out;
+  }
+  function plan(m, s, e) {
+    if (!(e > s)) return null;
+    var p = paraAt(m, s), P = m.paras[p], pe = P.start + P.len;
+    if (isSep(m, s)) return plan(m, s + 1, e);
+    if (e > pe) {
+      var q = paraAt(m, e - 1), Q = m.paras[q];
+      var a = plan(m, s, pe), b = e > Q.start ? plan(m, Q.start, e) : null;
+      if (a && b && state.api.w13) return { join: [a, b] };
+      return a;
+    }
+    var ls = s - P.start, le = e - P.start, target = P.raw.slice(ls, le);
+    if (!target || UNSAFE.test(target)) return null;
+    if (wordEscape(target).length > 240) {
+      var head = leaf(P, ls, ls + 110), tail = leaf(P, le - 110, le);
+      if (head && tail && state.api.w13) return { join: [head, tail] };
+      return head;
+    }
+    return leaf(P, ls, le);
+  }
+  function leavesOf(pl) {
+    if (!pl) return [];
+    if (pl.join) return leavesOf(pl.join[0]).concat(leavesOf(pl.join[1]));
+    return [pl];
+  }
+
+  // Keep only exact copies (Word also matches curly quotes for straight ones, and finds tracked deletions);
+  // if the count disagrees with the text we checked, give up rather than risk the wrong copy.
+  async function pick(ctx, list, stage) {
+    var withRev = [];
+    list.forEach(function (l) {
+      var rc = stage === "win" ? l.rc : l.nrc;
+      l.rev = null;
+      if (l.tracked && state.api.w14 && state.api.reviewed) {
+        l.rev = rc.items.map(function (it) { return it.getReviewedText("Current"); });
+        withRev.push(l);
+      }
+    });
+    if (withRev.length) await ctx.sync();
+    list.forEach(function (l) {
+      var rc = stage === "win" ? l.rc : l.nrc, want = stage === "win" ? l : l.narrow;
+      var exact = rc.items.filter(function (it, j) {
+        var txt = l.rev ? l.rev[j].value : it.text;
+        return normText(txt) === normText(want.text);
+      });
+      var r = exact.length === want.total ? exact[want.k] || null : null;
+      if (stage === "win") { l.range = r; if (!l.narrow) l.final = r; } else l.final = r;
+      l.rev = null;
+    });
+  }
+
+  async function locateMany(ctx, m, spans) {
+    var plans = spans.map(function (sp) { return sp ? plan(m, sp[0], sp[1]) : null; });
+    var leaves = [];
+    plans.forEach(function (pl) { leavesOf(pl).forEach(function (l) { leaves.push(l); }); });
+    var i, chunk;
+    for (i = 0; i < leaves.length; i += CHUNK) {
+      chunk = leaves.slice(i, i + CHUNK);
+      chunk.forEach(function (l) {
+        l.rc = m.items[l.p].search(wordEscape(l.text), { matchCase: true });
+        l.rc.load("text");
+      });
+      await ctx.sync();
+      await pick(ctx, chunk, "win");
+    }
+    var narrow = leaves.filter(function (l) { return l.range && l.narrow; });
+    for (i = 0; i < narrow.length; i += CHUNK) {
+      chunk = narrow.slice(i, i + CHUNK);
+      chunk.forEach(function (l) {
+        l.nrc = l.range.search(wordEscape(l.narrow.text), { matchCase: true });
+        l.nrc.load("text");
+      });
+      await ctx.sync();
+      await pick(ctx, chunk, "narrow");
+    }
+    function result(pl) {
+      if (!pl) return null;
+      if (pl.join) {
+        var a = result(pl.join[0]), b = result(pl.join[1]);
+        return a && b ? a.expandTo(b) : null;
+      }
+      return pl.final || null;
+    }
+    return plans.map(result);
+  }
+
+  // ---------- changing the document ----------
+  // Smallest change that turns old into neu, so formatting and the rest of the text are left alone
+  function textOp(m, start, old, neu) {
+    var a = 0, b = 0;
+    while (a < old.length && a < neu.length && old.charAt(a) === neu.charAt(a)) a++;
+    while (b < old.length - a && b < neu.length - a && old.charAt(old.length - 1 - b) === neu.charAt(neu.length - 1 - b)) b++;
+    var s = start + a, e = start + old.length - b, ins = neu.slice(a, neu.length - b);
+    if (e > s) return ins ? { op: "replace", start: s, end: e, text: ins } : { op: "delete", start: s, end: e };
+    if (!ins) return null;
+    var P = m.paras[paraAt(m, s)];
+    if (s > P.start) return { op: "after", start: s - 1, end: s, text: ins };
+    if (s < P.start + P.len) return { op: "before", start: s, end: s + 1, text: ins };
+    return null;
+  }
+  function textOps(m, e) {
+    var old = m.text.slice(e.start, e.end), neu = e.text;
+    if (old.indexOf("\n") < 0 && neu.indexOf("\n") < 0) { var o = textOp(m, e.start, old, neu); return o ? [o] : null; }
+    var os = old.split("\n"), ns = neu.split("\n");
+    if (os.length !== ns.length) return null;
+    var out = [], pos = e.start;
+    for (var i = 0; i < os.length; i++) {
+      if (os[i] !== ns[i]) { var o2 = textOp(m, pos, os[i], ns[i]); if (!o2) return null; out.push(o2); }
+      pos += os[i].length + 1;
+    }
+    return out;
+  }
+  function nonOverlapping(ops) {
+    ops = ops.slice().sort(function (x, y) { return (x.start - y.start) || (x.end - y.end); });
+    var out = [], end = -1;
+    ops.forEach(function (o) { if (o.start >= end) { out.push(o); end = o.end; } });
+    return out;
+  }
+  function opsFor(m, f) {
+    if (f.format) return [{ op: "format", start: f.start, end: f.end, prop: f.format.prop, value: f.format.value }];
+    if (f.missing) return f.suggest ? [{ op: "append", start: Infinity, text: f.suggest.text.replace(/^\n+/, "") }] : null;
+    var ops = [], ch = changesOf(f);
+    for (var i = 0; i < ch.length; i++) {
+      var o = textOps(m, ch[i]);
+      if (!o) return null;
+      ops = ops.concat(o);
+    }
+    return nonOverlapping(ops);
+  }
+
+  async function withTracking(ctx, fn) {
+    var turnOn = state.track && state.api.w14 && state.docTracking === "Off";
+    if (turnOn) ctx.document.changeTrackingMode = "TrackAll";
+    try { await fn(); }
+    finally {
+      if (turnOn) { ctx.document.changeTrackingMode = "Off"; await ctx.sync(); }
+    }
+  }
+
+  async function applyOps(ctx, m, ops) {
+    var placed = ops.filter(function (o) { return o.op !== "append"; });
+    var ranges = await locateMany(ctx, m, placed.map(function (o) { return [o.start, o.end]; }));
+    placed.forEach(function (o, i) { o.range = ranges[i]; });
+    var ready = ops.filter(function (o) { return o.op === "append" || o.range; });
+    if (!ready.length) return { applied: 0, missed: ops.length };
+    ready.sort(function (x, y) { return y.start - x.start; });
+    await withTracking(ctx, async function () {
+      ready.forEach(function (o) {
+        if (o.op === "append") ctx.document.body.insertParagraph(o.text, "End");
+        else if (o.op === "replace") o.range.insertText(o.text, "Replace");
+        else if (o.op === "delete") o.range.delete();
+        else if (o.op === "after") o.range.insertText(o.text, "After");
+        else if (o.op === "before") o.range.insertText(o.text, "Before");
+        else if (o.op === "format") o.range.font[o.prop] = o.value;
+      });
+      await ctx.sync();
+    });
+    return { applied: ready.length, missed: ops.length - ready.length };
+  }
+
+  // ---------- actions ----------
+  async function withWord(fn) {
+    if (state.busy) return false;
+    state.busy = true;
+    state.changed = false;
+    render();
+    var ok = true;
+    try {
+      await Word.run(function (ctx) { return fn(ctx); });
+    } catch (err) {
+      ok = false;
+      if (window.console) console.error(err);
+      var code = (err && (err.code || (err.debugInfo && err.debugInfo.code))) || "";
+      note(code === "ItemNotFound" || code === "InvalidObjectPath"
+        ? "That part of the document has moved or gone. Choose Check document to refresh the list."
+        : "Word could not finish that" + (code ? " (" + code + ")" : "") + ". Choose Check document and try again.", "error");
+    } finally {
+      state.busy = false;
+      render();
+    }
+    return ok;
+  }
+  function changedPrefix() { return state.changed ? "The document had changed, so it was checked again. " : ""; }
+  function trackedNote() {
+    return state.api.w14 && (state.track || state.docTracking !== "Off") ? " The change is tracked, so review it in Word." : "";
+  }
+
+  async function check(reason) {
+    await withWord(async function (ctx) {
+      var m = await readDoc(ctx);
+      commit(m, await scanAll(ctx, m));
+      var words = m.text.trim() ? m.text.trim().split(/\s+/).length : 0;
+      if (!words) note("This document is empty. Add some copy, then choose Check document.");
+      else note("Checked " + plural(m.paras.length, "paragraph", "paragraphs") + " as " + TYPE_LABEL[state.type] + "." +
+        (state.visible.length ? " Choose an issue to see it in the document." : " Now check the list below by eye."));
+      pruneIgnored();
+    });
+  }
+
+  async function goTo(n) {
+    var f0 = state.byN[n];
+    if (!f0) return;
+    state.openKey = f0.key;
+    if (f0.missing) { note("This is missing from the document, so there is nothing to select."); render(); return; }
+    var key = f0.key;
+    await withWord(async function (ctx) {
+      var m = await fresh(ctx), f = findByKey(key);
+      if (!f) { note(changedPrefix() + "That issue is no longer in the document."); return; }
+      var spans = f.locs || [[f.start, f.end]], idx = (state.loc[key] || 0) % spans.length;
+      var r = (await locateMany(ctx, m, [spans[idx]]))[0];
+      if (!r) { note(NOT_FOUND); return; }
+      r.select();
+      await ctx.sync();
+      state.loc[key] = idx + 1;
+      state.openKey = key;
+      note(changedPrefix() + (spans.length > 1 ? "Showing place " + (idx + 1) + " of " + spans.length + ". Choose it again for the next one." : "Selected in the document."));
+    });
+  }
+
+  async function fixOne(n) {
+    var f0 = state.byN[n];
+    if (!f0) return;
+    var key = f0.key, label = nameOf(f0);
+    await withWord(async function (ctx) {
+      var m = await fresh(ctx), f = findByKey(key);
+      if (!f) { note(changedPrefix() + "That issue is no longer in the document."); return; }
+      var ops = opsFor(m, f);
+      if (!ops || !ops.length) { note("This one needs an edit by hand in Word."); return; }
+      var r = await applyOps(ctx, m, ops);
+      if (!r.applied) { note(NOT_FOUND); return; }
+      var m2 = await readDoc(ctx);
+      commit(m2, await scanAll(ctx, m2));
+      state.focusN = n;
+      note(changedPrefix() + (f.missing ? "Added the line at the end of the document." : "Fixed: " + label + ".") +
+        (r.missed ? " " + plural(r.missed, "place", "places") + " could not be found, so check those by hand." : "") + trackedNote());
+    });
+  }
+
+  function safeCount() {
+    var n = 0;
+    state.visible.forEach(function (f) { if (f.kind === "FIX") n += f.format ? 1 : f.edits.length; });
+    return n;
+  }
+
+  async function fixAll() {
+    await withWord(async function (ctx) {
+      var m = await fresh(ctx), applied = 0, missed = 0, r;
+      var ops = [];
+      state.visible.forEach(function (f) {
+        if (f.kind !== "FIX" || f.format) return;
+        f.edits.forEach(function (e) { var o = textOps(m, e); if (o) ops = ops.concat(o); else missed++; });
+      });
+      ops = nonOverlapping(ops);
+      if (ops.length) {
+        r = await applyOps(ctx, m, ops);
+        applied += r.applied; missed += r.missed;
+        m = await readDoc(ctx);
+        commit(m, await scanAll(ctx, m));
+      }
+      var fmt = state.visible.filter(function (f) { return f.kind === "FIX" && f.format; });
+      if (fmt.length) {
+        r = await applyOps(ctx, m, fmt.map(function (f) { return opsFor(m, f)[0]; }));
+        applied += r.applied; missed += r.missed;
+        m = await readDoc(ctx);
+        commit(m, await scanAll(ctx, m));
+      }
+      note(changedPrefix() + (applied ? "Applied " + plural(applied, "safe fix", "safe fixes") + "." +
+        (missed ? " " + missed + " could not be found, so check those by hand." : "") + " What is left needs your judgement." + trackedNote()
+        : "There was nothing safe to fix."));
+    });
+  }
+
+  function ignore(n) {
+    var f = state.byN[n];
+    if (!f) return;
+    state.ignored[f.key] = true;
+    if (state.openKey === f.key) state.openKey = "";
+    state.focusN = n;
+    refilter();
+    saveSettings();
+    note("Ignored. It stays ignored in this document (save the document to keep that).");
+    render();
+  }
+  function restoreIgnored() {
+    state.ignored = {};
+    refilter();
+    saveSettings();
+    note("Ignored issues are back in the list.");
+    render();
+  }
+
+  async function removeCheckerComments(ctx) {
+    var cs = ctx.document.body.getComments();
+    cs.load("content");
+    await ctx.sync();
+    var n = 0;
+    cs.items.forEach(function (c) { if ((c.content || "").indexOf(PREFIX) === 0) { c.delete(); n++; } });
+    await ctx.sync();
+    return n;
+  }
+  function commentText(f) {
+    var ch = changesOf(f), extra = "";
+    if (f.format) extra = " Fix: " + (f.format.prop === "italic" ? "italics" : f.format.value ? "bold" : "not bold") + ".";
+    else if (f.rule === "G5") extra = " " + plural(f.count, "place", "places") + " in the document.";
+    else if (ch.length) extra = " Suggested: " + (resultText(f) === "" ? "remove it" : "\u201c" + oneLine(resultText(f)) + "\u201d") + ".";
+    return PREFIX + " (" + f.rule + " " + nameOf(f) + "): " + sentence(f.advice) + extra;
+  }
+  async function addComments() {
+    await withWord(async function (ctx) {
+      var m = await fresh(ctx);
+      var removed = await removeCheckerComments(ctx);
+      var list = state.visible.filter(function (f) { return !f.missing; });
+      var ranges = await locateMany(ctx, m, list.map(function (f) { return f.locs ? f.locs[0] : [f.start, f.end]; }));
+      var n = 0, missed = 0;
+      ranges.forEach(function (r, i) { if (r) { r.insertComment(commentText(list[i])); n++; } else missed++; });
+      await ctx.sync();
+      var nMissing = state.visible.length - list.length;
+      note(changedPrefix() + "Added " + plural(n, "comment", "comments") + "." + (removed ? " Replaced the checker's earlier comments." : "") +
+        (missed ? " " + missed + " could not be placed." : "") + (nMissing ? " Missing items are not commented: they are listed here and in the report." : ""));
+    });
+  }
+  async function removeComments() {
+    await withWord(async function (ctx) {
+      var n = await removeCheckerComments(ctx);
+      note(n ? "Removed " + plural(n, "checker comment", "checker comments") + ". Other comments are untouched." : "There were no checker comments to remove.");
+    });
+  }
+
+  // ---------- settings ----------
+  function loadSettings() {
+    try {
+      var s = Office.context.document.settings;
+      var t = s.get("kiwiherbType");
+      if (E.TYPES.indexOf(t) >= 0) state.type = t;
+      var ig = s.get("kiwiherbIgnored");
+      if (Array.isArray(ig)) ig.forEach(function (k) { if (typeof k === "string") state.ignored[k] = true; });
+    } catch (e) { /* settings are optional */ }
+    try { state.track = window.localStorage.getItem("kiwiherbTrack") === "1"; } catch (e) { state.track = false; }
+  }
+  function saveSettings() {
+    try {
+      var s = Office.context.document.settings;
+      s.set("kiwiherbType", state.type);
+      s.set("kiwiherbIgnored", Object.keys(state.ignored));
+      s.saveAsync(function () {});
+    } catch (e) { /* settings are optional */ }
+  }
+  function pruneIgnored() {
+    var live = {}, changed = false;
+    state.findings.forEach(function (f) { live[f.key] = 1; });
+    Object.keys(state.ignored).forEach(function (k) { if (!live[k]) { delete state.ignored[k]; changed = true; } });
+    if (changed) saveSettings();
+  }
+
+  // ---------- report ----------
+  function resultText(f) {
+    var ch = changesOf(f).filter(function (e) { return e.start >= f.start && e.end <= f.end; })
+      .sort(function (a, b) { return b.start - a.start; });
+    var s = f.found;
+    ch.forEach(function (e) { s = s.slice(0, e.start - f.start) + e.text + s.slice(e.end - f.start); });
+    return s;
+  }
+  function report() {
+    var f = state.visible, t = state.type;
+    var nFix = f.filter(function (x) { return x.kind === "FIX"; }).length, nStyle = f.filter(function (x) { return x.kind === "STYLE"; }).length;
+    var date = new Date().toLocaleDateString("en-NZ", { day: "numeric", month: "long", year: "numeric" });
+    var lines = ["Mandatories check, " + TYPE_LABEL[t] + ", " + date];
+    var name = docName();
+    if (name) lines.push("Document: " + name);
+    lines.push(nFix + " to fix, " + (f.length - nFix - nStyle) + " to check" + (nStyle ? ", " + plural(nStyle, "style note", "style notes") : ""), "");
+    f.forEach(function (x) {
+      var what = x.missing ? "" : " \"" + oneLine(x.rule === "G5" ? x.count + " places" : x.found) + "\"";
+      lines.push(x.n + ". " + x.kind + " " + x.rule + " " + nameOf(x) + what + " (" + (x.missing ? "missing" : "paragraph " + x.para) + "): " + sentence(x.advice));
+    });
+    var nIgnored = state.findings.length - f.length;
+    if (nIgnored) lines.push("", plural(nIgnored, "issue", "issues") + " ignored by the reviewer.");
+    var eye = EYE.filter(function (r) { return r[2].indexOf(t) >= 0; });
+    if (eye.length) {
+      lines.push("", "Check by eye:");
+      eye.forEach(function (r) { lines.push("- " + r[0] + " " + r[1]); });
+    }
+    return lines.join("\n");
+  }
+  function copyOut(text, label) {
+    function fallback() {
+      els.fbMsg.textContent = "Word did not let the panel copy. Select the " + label + " below and copy it (Ctrl+C or Cmd+C).";
+      els.fbText.value = text;
+      els.fb.hidden = false;
+      els.fbText.focus();
+      els.fbText.select();
+    }
+    function viaCommand() {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = document.execCommand && document.execCommand("copy");
+        document.body.removeChild(ta);
+        return !!ok;
+      } catch (e) { return false; }
+    }
+    function done() { note("Copied the " + label + ". Paste it into an email or Teams message."); render(); }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () { if (viaCommand()) done(); else fallback(); });
+        return;
+      }
+    } catch (e) { /* fall through */ }
+    if (viaCommand()) done(); else fallback();
+  }
+
+  // ---------- rendering ----------
+  function previewHTML(f) {
+    var arrow = " <span class=\"to\">\u2192</span> ";
+    if (f.missing) return "Missing from the document";
+    if (f.format) {
+      return quoted(f.found) + arrow + (f.format.prop === "italic" ? "italics" : f.format.value ? "bold" : "not bold");
+    }
+    if (f.rule === "G5") return plural(f.count, "place", "places") + (f.edits.length ? arrow + "add a second space" : "");
+    if (f.rule === "A2") return "Order: " + esc(shorten(f.found, 60));
+    var ch = changesOf(f), out = quoted(f.found);
+    if (ch.length) {
+      var res = resultText(f);
+      out += arrow + (res === "" ? "remove" : quoted(res));
+    }
+    return out;
+  }
+  function detailHTML(f) {
+    var msg = f.rule === "G5" ? plural(f.count, "place has", "places have") + " one space after a full stop. " + sentence(f.advice)
+      : f.rule === "A2" ? "Order found: " + f.found + ". " + sentence(f.advice) : sentence(f.advice);
+    var meta = [];
+    if (f.span) meta.push("This one runs across paragraphs, so edit it by hand.");
+    else if (!canFix(f) && !f.missing) meta.push("No automatic fix: edit it in the document.");
+    if (f.kind === "STYLE") meta.push("Style note, not a breach.");
+    if (f.kind === "CHECK" && canFix(f)) meta.push("Needs judgement: Fix applies the suggestion shown.");
+    return "<div class=\"detail\"><p>" + esc(msg) + "</p>" + (meta.length ? "<p class=\"meta\">" + esc(meta.join(" ")) + "</p>" : "") + "</div>";
+  }
+  function rowHTML(f) {
+    var k = kindOf(f), name = esc(nameOf(f)), open = state.openKey === f.key;
+    var acts = "";
+    if (canFix(f)) {
+      acts += "<button type=\"button\" class=\"mini primary\" data-act=\"fix\" data-n=\"" + f.n + "\" aria-label=\"" + (f.missing ? "Add" : "Fix") + " issue " + f.n + ", " + name + "\">" + (f.missing ? "Add" : "Fix") + "</button>";
+    } else if (!f.missing) {
+      acts += "<button type=\"button\" class=\"mini\" data-act=\"go\" data-n=\"" + f.n + "\" aria-label=\"Show issue " + f.n + " in the document\">Show</button>";
+    }
+    acts += "<button type=\"button\" class=\"mini\" data-act=\"ignore\" data-n=\"" + f.n + "\" aria-label=\"Ignore issue " + f.n + ", " + name + "\">Ignore</button>";
+    return "<li class=\"issue" + (open ? " open" : "") + "\" data-n=\"" + f.n + "\">" +
+      "<button type=\"button\" class=\"go\" data-act=\"go\" data-n=\"" + f.n + "\" aria-expanded=\"" + open + "\">" +
+      "<span class=\"badge " + k + "\">" + f.n + "</span><span class=\"name\">" + name + " <span class=\"rule\">" + f.rule + "</span></span>" +
+      "<span class=\"what\">" + previewHTML(f) + "</span></button>" +
+      (open ? detailHTML(f) : "") + "<div class=\"acts\">" + acts + "</div></li>";
+  }
+
+  function render() {
+    if (!els.app) return;
+    var vis = state.visible, busy = state.busy;
+    var nFix = vis.filter(function (f) { return f.kind === "FIX"; }).length;
+    var nStyle = vis.filter(function (f) { return f.kind === "STYLE"; }).length, nCheck = vis.length - nFix - nStyle;
+    var safe = safeCount();
+
+    els.ctype.value = state.type;
+    els.ctype.disabled = busy;
+    els.check.disabled = busy;
+    els.check.textContent = busy ? "Working\u2026" : state.checked ? "Check again" : "Check document";
+    els.fixAll.disabled = busy || !safe;
+    els.fixAll.textContent = safe ? "Fix all safe (" + safe + ")" : "Fix all safe";
+    els.status.textContent = busy ? "Working in Word\u2026" : state.note;
+    els.status.className = "status" + (state.noteKind === "error" && !busy ? " error" : "");
+
+    els.counts.innerHTML = !state.checked ? "" : vis.length
+      ? "<span class=\"pill fix\">" + nFix + " to fix</span><span class=\"pill check\">" + nCheck + " to check</span>" +
+        (nStyle ? "<span class=\"pill style\">" + plural(nStyle, "style note", "style notes") + "</span>" : "")
+      : "<span class=\"pill clear\">Nothing flagged</span>";
+
+    els.trackOpt.hidden = !state.api.w14;
+    els.track.checked = state.track;
+    els.track.disabled = busy || state.docTracking !== "Off";
+    var tn = state.api.w14 && state.docTracking !== "Off" ? "Track changes is on in this document, so every fix is tracked." : "";
+    els.trackNote.textContent = tn;
+    els.trackNote.hidden = !tn;
+
+    els.issues.innerHTML = vis.length ? vis.map(rowHTML).join("") : (state.checked ? "<li class=\"none\">Nothing flagged by the automatic checks.</li>" : "");
+    els.issues.querySelectorAll("button").forEach(function (b) { b.disabled = busy; });
+    if (state.focusN && !busy) {
+      var rows = els.issues.querySelectorAll(".issue");
+      var row = els.issues.querySelector(".issue[data-n=\"" + state.focusN + "\"]") || rows[rows.length - 1];
+      var btn = row && (row.querySelector(".acts .mini") || row.querySelector(".go"));
+      if (btn) btn.focus({ preventScroll: false });
+      else els.check.focus();
+      state.focusN = 0;
+    }
+
+    var nIgnored = state.findings.length - vis.length;
+    els.ignored.innerHTML = nIgnored ? plural(nIgnored, "issue", "issues") + " ignored in this document. <button type=\"button\" class=\"link\" id=\"restore\"" + (busy ? " disabled" : "") + ">Show them again</button>" : "";
+
+    var eye = EYE.filter(function (r) { return r[2].indexOf(state.type) >= 0; });
+    var ticked = {};
+    els.eye.querySelectorAll("input:checked").forEach(function (i) { ticked[i.getAttribute("data-key")] = true; });
+    els.eyeCount.textContent = "(" + eye.length + ")";
+    els.eye.innerHTML = eye.map(function (r, i) {
+      var key = r[0] + ":" + r[1].slice(0, 24);
+      return "<li><label for=\"eye-" + i + "\"><input type=\"checkbox\" id=\"eye-" + i + "\" data-key=\"" + esc(key) + "\"" + (ticked[key] ? " checked" : "") +
+        "><span class=\"rule\">" + r[0] + "</span><span class=\"eye-text\">" + esc(r[1]) + "</span></label></li>";
+    }).join("");
+
+    var comments = state.api.w14;
+    els.addComments.hidden = !comments;
+    els.removeComments.hidden = !comments;
+    els.moreHint.hidden = !comments;
+    els.addComments.disabled = busy || !vis.some(function (f) { return !f.missing; });
+    els.removeComments.disabled = busy;
+    els.copyReport.disabled = busy || !state.checked;
+  }
+
+  // ---------- start-up ----------
+  function showOutside(html) {
+    $("app").hidden = true;
+    $("outside").hidden = false;
+    $("outside-msg").innerHTML = html;
+  }
+  function setup() {
+    els = {
+      app: $("app"), ctype: $("ctype"), check: $("check"), status: $("status"), counts: $("counts"), fixAll: $("fix-all"),
+      trackOpt: $("track-opt"), track: $("track"), trackNote: $("track-note"), issues: $("issues"), ignored: $("ignored"),
+      eye: $("eye"), eyeCount: $("eye-count"), addComments: $("add-comments"), removeComments: $("remove-comments"),
+      copyReport: $("copy-report"), moreHint: $("more-hint"), fb: $("copy-fallback"), fbMsg: $("copy-fallback-msg"),
+      fbText: $("copy-fallback-text"), fbClose: $("copy-fallback-close")
+    };
+    $("version").textContent = VERSION;
+    els.app.hidden = false;
+
+    els.ctype.addEventListener("change", function () {
+      state.type = els.ctype.value;
+      state.openKey = "";
+      saveSettings();
+      check();
+    });
+    els.check.addEventListener("click", function () { check(); });
+    els.fixAll.addEventListener("click", fixAll);
+    els.track.addEventListener("change", function () {
+      state.track = els.track.checked;
+      try { window.localStorage.setItem("kiwiherbTrack", state.track ? "1" : "0"); } catch (e) { /* optional */ }
+    });
+    els.issues.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-act]");
+      if (!b || b.disabled) return;
+      var n = +b.getAttribute("data-n"), a = b.getAttribute("data-act");
+      if (a === "go") goTo(n);
+      else if (a === "fix") fixOne(n);
+      else if (a === "ignore") ignore(n);
+    });
+    els.ignored.addEventListener("click", function (e) { if (e.target.id === "restore") restoreIgnored(); });
+    els.addComments.addEventListener("click", addComments);
+    els.removeComments.addEventListener("click", removeComments);
+    els.copyReport.addEventListener("click", function () { copyOut(report(), "report"); });
+    els.fbClose.addEventListener("click", function () { els.fb.hidden = true; });
+    $("help-link").addEventListener("click", function (e) {
+      try {
+        if (Office.context.ui && Office.context.ui.openBrowserWindow) {
+          Office.context.ui.openBrowserWindow(new URL("help.html", window.location.href).href);
+          e.preventDefault();
+        }
+      } catch (err) { /* Word would not open a browser window, so the link opens normally */ }
+    });
+    render();
+  }
+
+  if (window.__MOCK__) window.__PANE__ = state;   // test harness only: the mock Word sets __MOCK__
+
+  function start() {
+    if (window.__TOO_OLD__) return;
+    if (!E) { showOutside("The checker did not load. Close the panel and open it again."); return; }
+    if (typeof Office === "undefined" || !Office.onReady) {
+      showOutside("The panel could not reach Microsoft's Office service. Check the internet connection, then close the panel and open it again.");
+      return;
+    }
+    Office.onReady(function (info) {
+      if (!info || info.host !== Office.HostType.Word || typeof Word === "undefined") {
+        showOutside(info && info.host ? "This panel works in Word only." :
+          "Open this panel from Word: on the Home tab, choose Mandatories. To check copy without Word, use the Kiwiherb mandatories check web page.");
+        return;
+      }
+      var req = Office.context.requirements;
+      if (!req.isSetSupported("WordApi", "1.1")) { showOutside("This version of Word is too old for the checker. Use Word for Microsoft 365, Word on the web or Word 2021 and later."); return; }
+      state.api.w13 = req.isSetSupported("WordApi", "1.3");
+      state.api.w14 = req.isSetSupported("WordApi", "1.4");
+      loadSettings();
+      setup();
+      check();
+    });
+  }
+  start();
+})();
+
+</script>
+</body>
+</html>

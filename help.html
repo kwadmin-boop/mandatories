@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kiwiherb Mandatories for Word: help and set-up</title>
+<style>
+:root {
+  --bg: #f4f7f4; --surface: #ffffff; --ink: #18221c; --muted: #56645b; --line: #d3ddd5;
+  --accent: #2b6a3a; --accent-ink: #ffffff; --accent-soft: #e2efe4; --warn: #8a5800; --warn-soft: #fdf0d2;
+  --fix: #b3261e; --check: #8a5800; --style: #34598f;
+  --body: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141a16; --surface: #1c241f; --ink: #e4ebe5; --muted: #9cada2; --line: #34423a;
+    --accent: #7fc58f; --accent-ink: #0c1a10; --accent-soft: #1f3526; --warn: #f0c260; --warn-soft: #372b12;
+    --fix: #ff8b7d; --check: #f0c260; --style: #93b4ec;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.55 var(--body); }
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+header.wrap { padding-top: 36px; padding-bottom: 8px; }
+h1 { font-size: clamp(1.6rem, 4vw, 2.1rem); line-height: 1.15; margin: 0 0 8px; letter-spacing: -0.015em; }
+h2 { font-size: 1.25rem; margin: 0 0 10px; }
+h3 { font-size: 1.02rem; margin: 18px 0 6px; }
+p { margin: 0 0 10px; }
+a { color: var(--accent); }
+.lede { color: var(--muted); font-size: 1.05rem; max-width: 64ch; }
+section.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; margin: 18px 0; }
+ol, ul { margin: 0 0 10px; padding-left: 1.3em; }
+li { margin: 4px 0; }
+code { font-family: var(--mono); font-size: 0.86em; background: var(--accent-soft); padding: 1px 6px; border-radius: 4px; overflow-wrap: anywhere; }
+.btn { font: inherit; font-weight: 700; padding: 9px 16px; border-radius: 8px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+.btn:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.note { padding: 10px 14px; border-radius: 10px; background: var(--warn-soft); }
+.note b { color: var(--warn); }
+.muted { color: var(--muted); }
+.row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 12px 0; }
+.key { display: inline-block; min-width: 1.4em; padding: 0 6px; border-radius: 999px; color: #fff; font-weight: 700; font-size: 0.8rem; text-align: center; }
+.key.fix { background: var(--fix); } .key.check { background: var(--check); } .key.style { background: var(--style); }
+@media (prefers-color-scheme: dark) { .key { color: #111; } }
+.reference details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 4px 22px; margin: 18px 0; }
+.reference summary { cursor: pointer; font-weight: 700; padding: 12px 0; }
+.ref-cols ul, .ref-cols ol { list-style: none; padding: 0; }
+.ref-cols li { margin: 6px 0; }
+.ref-cols li b { font-family: var(--mono); font-weight: 500; font-size: 0.8rem; margin-right: 6px; color: var(--accent); }
+footer.wrap { color: var(--muted); font-size: 0.88rem; padding-bottom: 40px; }
+</style>
+</head>
+<body>
+<header class="wrap">
+  <h1>Kiwiherb Mandatories for Word</h1>
+  <p class="lede">A panel in Word that checks the open document against the Kiwiherb Copy Mandatories, shows each issue in the document and fixes what it safely can. It runs the same checks as the Kiwiherb mandatories check web page, plus a few that only Word can do.</p>
+</header>
+
+<main class="wrap">
+  <section class="card" id="setup">
+    <h2>Set it up</h2>
+    <p>Word needs a small file called a manifest that tells it where the panel lives. Download the manifest for this address, then follow one of the options below.</p>
+    <p class="muted">Panel address: <code id="base">(this page's address)</code></p>
+    <div class="row">
+      <button type="button" class="btn" id="download">Download the manifest</button>
+      <span class="muted" id="download-msg" role="status"></span>
+    </div>
+    <p class="note" id="not-https" hidden><b>This copy is not on an https address.</b> Word only loads add-ins from https addresses, so host these files somewhere that uses https (GitHub Pages, Cloudflare Pages and Netlify all do, for free).</p>
+
+    <h3>Try it yourself in Word on the web</h3>
+    <ol>
+      <li>Open a document in Word at office.com.</li>
+      <li>Choose <b>Home</b>, then <b>Add-ins</b>, then <b>More Settings</b>.</li>
+      <li>In the Office Add-ins box, choose <b>Upload My Add-in</b>, browse to the manifest and choose <b>Upload</b>.</li>
+      <li>A <b>Mandatories</b> button appears on the Home tab. Word on the web keeps it in this browser until its data is cleared.</li>
+    </ol>
+
+    <h3>Word on a Mac, for one person</h3>
+    <ol>
+      <li>Quit Word. In Finder, choose <b>Go</b>, then <b>Go to Folder</b>. Paste <code>~/Library/Containers/com.microsoft.Word/Data/Documents/wef</code> and press Return. If the wef folder does not exist, create it inside that Documents folder.</li>
+      <li>Copy the manifest into that folder.</li>
+      <li>Open Word and a document. The <b>Mandatories</b> button appears on the Home tab (or under Add-ins).</li>
+    </ol>
+
+    <h3>Everyone at Phytomed, including Word on Windows</h3>
+    <ol>
+      <li>A Microsoft 365 admin signs in to the Microsoft 365 admin centre.</li>
+      <li>Go to <b>Settings</b>, then <b>Integrated apps</b>, then the <b>Add-ins</b> link near the top of the page.</li>
+      <li>Choose <b>Deploy Add-in</b>, then <b>Next</b>. Choose to upload a custom add-in, pick the manifest file and choose <b>Upload</b>.</li>
+      <li>Choose who gets it (<b>Just me</b> is a good first test, then <b>Everyone</b> or specific groups) and choose <b>Deploy</b>.</li>
+      <li>It can take a day or so (up to 72 hours) to appear on the Home tab. Restarting Word helps.</li>
+    </ol>
+    <p class="muted">There is no cost: deployment is part of Microsoft 365 business plans. If the admin centre looks different, search Microsoft's help for "deploy add-ins".</p>
+  </section>
+
+  <section class="card" id="using">
+    <h2>Using it</h2>
+    <ol>
+      <li>On the Home tab, choose <b>Mandatories</b>. The panel opens on the right and checks the document straight away.</li>
+      <li>Choose what the copy is for under <b>Checking this document as</b>: a Word document, a web page or email, a social post, POS or print, New Zealand packaging or Australian packaging. Different rules apply to each, and the document remembers your choice.</li>
+      <li>Each issue has a number: <span class="key fix">1</span> red to fix, <span class="key check">2</span> amber to check (it needs your judgement) and <span class="key style">3</span> blue for a style note (not a breach).</li>
+      <li>Choose an issue to select it in the document and read why it was flagged. Choose <b>Fix</b> to apply the change, or <b>Ignore</b> if it is fine as it is. Ignored issues stay ignored in that document once it is saved.</li>
+      <li><b>Fix all safe</b> applies every clear-cut fix at once. Amber and blue issues are left for you.</li>
+      <li>To review changes before they stand, tick <b>Show my fixes as tracked changes</b>. Undo in Word (Ctrl+Z or Cmd+Z) also reverses a fix.</li>
+      <li>After editing the document yourself, choose <b>Check again</b>. The panel also checks again on its own if the document has changed when you choose an issue.</li>
+      <li>Under <b>More</b>: put every issue into the document as Word comments for whoever reviews it next, take the checker's comments out again or copy a report to paste into an email.</li>
+      <li>Work through <b>Check by eye</b> as well: some rules (layout, logos, product name capitals) cannot be checked automatically.</li>
+    </ol>
+  </section>
+
+  <section class="card" id="word">
+    <h2>What the Word panel adds</h2>
+    <ul>
+      <li><b>Headings (G14).</b> Headings in Word's heading styles are checked for sentence case. Names, places, brands and botanical genus names keep their capitals. Product names in headings will show as amber: ignore them.</li>
+      <li><b>Botanical names in italics (S5).</b> Any botanical name on the herb list (eg Echinacea purpurea, Ginkgo biloba) that is not in italics is flagged. Fix puts it in italics.</li>
+      <li><b>Australian packaging bold rules.</b> CONTAINS NO in bold (A13), "In a base of" not bold (A12) and the standard warnings not bold (A1).</li>
+      <li><b>Fixes keep your formatting.</b> Only the characters that need to change are changed, so bold, italics and styles stay put.</li>
+    </ul>
+    <h3>Good to know</h3>
+    <ul>
+      <li>It checks the main text of the document, including tables. Headers, footers, text boxes and footnotes are not checked.</li>
+      <li>Nothing leaves the document: the checks run inside the panel, and the panel only downloads its own files and Microsoft's Office library.</li>
+      <li>It needs Word for Microsoft 365 (Windows or Mac), Word on the web or Word 2021 and later. Comments and tracked-change fixes need Word for Microsoft 365 or Word on the web; other versions hide those buttons.</li>
+      <li>When the mandatories change, the checks need updating too. Updating the files where they are hosted updates the panel for everyone, with no reinstall.</li>
+    </ul>
+  </section>
+</main>
+
+<section class="wrap reference" aria-label="The mandatories">
+  <details>
+    <summary>All the mandatories, and how the checker reads them</summary>
+    <div class="ref-cols">
+      <div>
+        <h3>General conventions</h3>
+        <ul>
+          <li><b>G1</b>Product names keep every word capitalised (Peppermint Oil). Headings are sentence case. Exceptions: supplier brands styled their way (Wellmune) and quotes repeated from another source.</li>
+          <li><b>G2</b>te reo Māori written accurately, with macrons: Hoheria, Horopito, Kānuka, Kawakawa, Kia ora, Kohekohe, Kōrero, Koromiko, Kūmarahou (or Kūmerahou), Mānuka, Māori, Ngā mahi, Rongoā, Tānekaha, Totarol, Rātā.</li>
+          <li><b>G3</b>QR code on all cartons, and on bottles where space permits (exceptions agreed by the CEO or GM strategy). On cartons, right of the barcode; the barcode can drop to 80%. 1.5 or 1.25 cm square preferred, 1 cm minimum on small formats. White background ideal; orange or green by range on POS and packaging.</li>
+          <li><b>G4</b>Each precaution or warning starts on a new line in collateral and larger packaging. Small formats such as balms may run them together.</li>
+          <li><b>G5</b>Full stops on full sentences, including bulleted ones, but not on short fragments. Two spaces after full stops in documents and packaging; one space on social media, and on packaging where space is tight.</li>
+          <li><b>G6</b>No Oxford comma (Chamomile, Lemon Balm, Ginger and Rhubarb).</li>
+          <li><b>G7</b>"and" in full, never "&amp;", except in product names (Foot &amp; Nail Cream) or on social with approval.</li>
+          <li><b>G8</b>Do not open a sentence or herb description with the herb name, common or Latin, followed by "is" (Kawakawa is a native shrub; Ginkgo biloba is a tree), or with "Is".</li>
+          <li><b>G9</b>Addresses include the postcode: Phytomed Medicinal Herbs Ltd, 16 Charann Place, Auckland 1026 (no Avondale). Phytomed Australia PTY Ltd, Level 12, 189 Kent Street, NSW 2000 (no Sydney).</li>
+          <li><b>G10</b>Limited in full in copy, not Ltd, except on packaging where room is needed and in partner or supplier names.</li>
+          <li><b>G11</b>eg and ie with no full stops.</li>
+          <li><b>G12</b>British English: defence, organise, analyse, ageing, colour, flavour. Practice is the noun, practise the verb.</li>
+          <li><b>G13</b>Fern logo above "Made in New Zealand" wherever possible, with a recommended 3 mm gap (2 mm on small formats). Never the Kiwi NZ made logo or any other Kiwi or NZ type logo.</li>
+          <li><b>G14</b>Headings in sentence case: Main indications, not Main Indications.</li>
+          <li><b>G15</b>New Zealand in full, not NZ (social media is the exception).</li>
+          <li><b>G16</b>Websites in lower case with no www: kiwiherb.co.nz.</li>
+        </ul>
+        <h3>House rule</h3>
+        <ul>
+          <li><b>HOUSE</b>No em dashes (the long dash) in any copy: rewrite with a comma, colon or full stop. Spaced en dashes used as dashes get the same treatment.</li>
+          <li><b>STYLE</b>A herb name followed by "is" in the middle of a sentence (In China, ginkgo biloba is revered) is flagged in blue as lazy phrasing. It is not a breach of the mandatories, just worth rewording.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Scientific information</h3>
+        <ul>
+          <li><b>S1</b>Acute dose first, then Maintenance.</li>
+          <li><b>S2</b>Never Aqua: purified water.</li>
+          <li><b>S3</b>No misleading buttons or roundels (Scientifically Studied, contains Organic ingredients).</li>
+          <li><b>S4</b>Vege Cap, not made-up names such as Plantcap. Australian packaging: Hard Capsule.</li>
+          <li><b>S5</b>Latin names in italics, only the first word capitalised (<i>Echinacea purpurea</i>); brackets never italic. Marketing and education: common name first. Packaging: botanical name first. Australian front label: full botanical name only, no common name in brackets.</li>
+          <li><b>S6</b>A space between amount and unit: 15 mL.</li>
+          <li><b>S7</b>Children's products youngest to oldest; family and adult range Adults, then Children.</li>
+          <li><b>S8</b>Natural before any named flavour (Natural Strawberry Flavour).</li>
+          <li><b>S9</b>One unit across an ingredient list; use g once most ingredients are over 1,000 mg. Commas in numbers from 1,000.</li>
+          <li><b>S10</b>Glycerol, never Glycerine.</li>
+          <li><b>S11</b>"If symptoms persist, talk to your health professional." word for word on all packaging, POS and social media.</li>
+          <li><b>S12</b>Never "New Zealand Hops".</li>
+          <li><b>S13</b>A daily maximum goes after the last dose (Max of 2 daily).</li>
+          <li><b>S14</b>mL, never ml (except customer publications whose convention is ml).</li>
+          <li><b>S15</b>Mucous is the adjective (mucous membrane); mucus is the substance.</li>
+          <li><b>S16</b>Ranges with no spaces and a plain hyphen: 20-30 mL.</li>
+          <li><b>S17</b>Directions include "Shake well before use." Children's Immune Drops: "Shake vigorously before use as active ingredients may settle."</li>
+          <li><b>S18</b>Years in full (12 years, not 12 yrs); never "children over 12" without "years".</li>
+          <li><b>S19</b>Organic Beeswax, not Yellow Beeswax (unless the listing notification says Yellow Beeswax).</li>
+          <li><b>S20</b>Hyphenated: anti-anxiety, anti-emetic, anti-inflammatory, anti-oedema, anti-pigmentation, anti-viral, de-stuff, multi-action, non-habit forming, sleep-inducing, un-block. One word: antihistamine, antiallergic, anticoagulant, antiplatelet, antidepressant, antitussive, antifungal, antibacterial, antimicrobial, antioxidant, antiseptic, antispasmodic, cardioprotective, decongestant, ongoing, overactive, overstimulated, overwhelmed, unwell, wellbeing. Two words: hay fever, long lasting, trans epidermal, night time. Also ageing, advice (noun) and New Zealand grown.</li>
+          <li><b>S21</b>New Zealand packaging: "Suitable for use while pregnant and breastfeeding." Australian packaging: leave it off. Not suitable (both): "Not recommended during pregnancy or breastfeeding."</li>
+          <li><b>S22</b>Small packaging panels say Directions, not Dosage.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Australian packaging</h3>
+        <ul>
+          <li><b>A1</b>"Always read the label and use as directed." on every box and label; "Do not use if carton seal is missing or broken." on boxes; "Store below 30°C"; warnings never bold or in capitals; liquids: "Do not use if cap seal on bottle is broken."; "If coughing persists, consult your doctor." where it applies; warnings run together.</li>
+          <li><b>A2</b>Adult warning order: read the label, symptoms persist, coughing persists, children under 2, infants under 12 months, alcohol, sugars, seal, keep out of reach, store below 30°C.</li>
+          <li><b>A3</b>Children's warning order: read the label, children under 2, infants under 12 months, symptoms persist, coughing persists, alcohol, sugars, seal, keep out of reach, store below 30°C.</li>
+          <li><b>A4</b>AUST L in white on high-contrast backgrounds, black on white.</li>
+          <li><b>A5</b>Children's products: "Each mL ... contains:". Adult liquids: the minimum dose. Topicals: "Each gram contains:". Capsules: "Each capsule contains:".</li>
+          <li><b>A6</b>Ingredients capitalised in "In a base of Olive Oil, Organic Beeswax, Thyme Oil and Lavender Oil." but not in "Contains sugars as honey."</li>
+          <li><b>A7</b>No comma after juice: "Dilute in 30 mL of water or juice and drink immediately."</li>
+          <li><b>A8</b>Microlitres in full.</li>
+          <li><b>A9</b>Ingredients box in the right panel (left where space is tight); label blurb at the top of the left panel.</li>
+          <li><b>A10</b>Brackets around ingredients: (Apple) (Juice Concentrate) (organic).</li>
+          <li><b>A11</b>"Please recycle" logo, not "please recycle me".</li>
+          <li><b>A12</b>"In a base of X, Y and Z." is not bold.</li>
+          <li><b>A13</b>"CONTAINS NO artificial flavours, sweeteners, colours or preservatives." with CONTAINS NO in bold capitals.</li>
+          <li><b>A14</b>Name the honey type: Honey (Mānuka and Thyme).</li>
+          <li><b>A15</b>"from", not "equivalent to" or "derived from": dry root extract from 750 mg dry root.</li>
+        </ul>
+        <h3>How the checker reads unclear rules</h3>
+        <ol>
+          <li><b>1</b>Yellow Beeswax and "Lavendar" in the A6 example are treated as superseded by S19 and a typo.</li>
+          <li><b>2</b>"Long lasting" and "night time" are flagged for checking, because S20 also says to hyphenate before a noun.</li>
+          <li><b>3</b>G8 knows the common and Latin names in the herb poster master spreadsheet, plus Ashwagandha, Blackcurrant, Eucalyptus, Olive Leaf, Rehmannia, Rātā and current Latin names such as Piper excelsum. It also catches openings after a quote mark, a bracket or a list marker. Questions that start with "Is" (FAQ headings) are not flagged.</li>
+          <li><b>4</b>Items listed under Australia apply to Australian packaging; on New Zealand packaging "derived from" is flagged for checking.</li>
+          <li><b>5</b>"Shake well before use" is checked on liquids (anything dosed in mL).</li>
+          <li><b>6</b>Two spaces after full stops is not checked on web pages or social posts.</li>
+        </ol>
+      </div>
+    </div>
+  </details>
+</section>
+
+<footer class="wrap">
+  <p>Kiwiherb Mandatories for Word, version <span>1.0</span>. Rules from the Kiwiherb Copy Mandatories 2023/2024/2025/2026, confirmed by MC. Phytomed Medicinal Herbs Limited.</p>
+</footer>
+
+<script type="text/plain" id="manifest-template"><?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+  <Id>f9afd214-dcd4-4f82-8868-fa908f2b6ef2</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Phytomed Medicinal Herbs Limited</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Kiwiherb Mandatories"/>
+  <Description DefaultValue="Checks copy against the Kiwiherb Copy Mandatories and fixes what it safely can."/>
+  <IconUrl DefaultValue="__BASE__assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="__BASE__assets/icon-64.png"/>
+  <SupportUrl DefaultValue="__BASE__help.html"/>
+  <Hosts>
+    <Host Name="Document"/>
+  </Hosts>
+  <Requirements>
+    <Sets DefaultMinVersion="1.1">
+      <Set Name="WordApi" MinVersion="1.1"/>
+    </Sets>
+  </Requirements>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="__BASE__taskpane.html"/>
+  </DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Hosts>
+      <Host xsi:type="Document">
+        <DesktopFormFactor>
+          <GetStarted>
+            <Title resid="GetStarted.Title"/>
+            <Description resid="GetStarted.Description"/>
+            <LearnMoreUrl resid="GetStarted.LearnMoreUrl"/>
+          </GetStarted>
+          <FunctionFile resid="Commands.Url"/>
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <OfficeTab id="TabHome">
+              <Group id="KiwiherbGroup">
+                <Label resid="Group.Label"/>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16"/>
+                  <bt:Image size="32" resid="Icon.32x32"/>
+                  <bt:Image size="80" resid="Icon.80x80"/>
+                </Icon>
+                <Control xsi:type="Button" id="KiwiherbOpen">
+                  <Label resid="Button.Label"/>
+                  <Supertip>
+                    <Title resid="Button.Label"/>
+                    <Description resid="Button.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16"/>
+                    <bt:Image size="32" resid="Icon.32x32"/>
+                    <bt:Image size="80" resid="Icon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>KiwiherbMandatories</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16x16" DefaultValue="__BASE__assets/icon-16.png"/>
+        <bt:Image id="Icon.32x32" DefaultValue="__BASE__assets/icon-32.png"/>
+        <bt:Image id="Icon.80x80" DefaultValue="__BASE__assets/icon-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="__BASE__help.html"/>
+        <bt:Url id="Commands.Url" DefaultValue="__BASE__commands.html"/>
+        <bt:Url id="Taskpane.Url" DefaultValue="__BASE__taskpane.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="GetStarted.Title" DefaultValue="Kiwiherb Mandatories is ready"/>
+        <bt:String id="Group.Label" DefaultValue="Kiwiherb"/>
+        <bt:String id="Button.Label" DefaultValue="Mandatories"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="GetStarted.Description" DefaultValue="On the Home tab, choose Mandatories to check this document against the Kiwiherb Copy Mandatories."/>
+        <bt:String id="Button.Tooltip" DefaultValue="Check this document against the Kiwiherb Copy Mandatories, then fix or ignore each issue."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>
+</script>
+<script>
+(function () {
+  "use strict";
+  var base = window.location.href.replace(/[?#].*$/, "").replace(/[^\/]*$/, "");
+  var https = window.location.protocol === "https:";
+  document.getElementById("base").textContent = base;
+  document.getElementById("not-https").hidden = https;
+  document.getElementById("download").addEventListener("click", function () {
+    var xml = document.getElementById("manifest-template").textContent.replace(/^\s+/, "").replace(/__BASE__/g, base);
+    var blob = new Blob([xml], { type: "application/xml" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "kiwiherb-mandatories-manifest.xml";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    document.getElementById("download-msg").textContent = https
+      ? "Downloaded kiwiherb-mandatories-manifest.xml for this address."
+      : "Downloaded, but it points at an address Word will not load (not https).";
+  });
+})();
+</script>
+</body>
+</html>
