@@ -1,0 +1,65 @@
+# Kiwiherb and Phytomed product names. The Mandatories panel never puts these into sentence case,
+# and an & inside one is fine. One name per line, written the way the product is named. Shorter forms
+# are recognised too: without Organic (Children's Echinature) or the last words (Stomach Calm).
+# To add a product, edit this file on GitHub and commit: the panel reads it each time it opens.
+# Lines starting with # are notes. Started from the Kiwiherb shop's product list, 17 November 2026.
+
+Bedtime Bliss
+Calm Down
+Children's Goodnight Chest Syrup
+Children's Immune Drops
+Children's Organic Chest Syrup
+Children's Organic Echinature
+Children's Organic Lung Clear Syrup
+Children's Organic Throat Syrup
+Children's Winter Protocol
+ColicComfort
+DermaCare Cream
+Dual-Action Chest & Lung Support
+Easy blend base cream
+EchiBerry
+Echinacea Capsules
+Echinature
+Echinature8.0
+Ginkgo Alert
+Herbal Allergy Formula
+Herbal Digestive Aid
+Herbal Throat Formula
+Herbal Throat Spray
+ImmuneBerry
+Immunity Bundle
+Kawakawa Soothing Balm
+Kawakawa Stomach Calm
+Kiwiherb Dosage Syringe
+Kiwiherb Herbal Dosage Device
+Kānuka Foot & Nail Cream
+Manuka Oil
+Manuka Skin & Nail Solution
+Mānuka Mouthwash
+Natural Notepad
+Organic Baby Balm
+Organic Calendula Healing Balm
+Organic Chest Syrup
+Organic Comfrey Bruise Balm
+Organic De-Stuff
+Organic De-Stuff for Kids
+Organic De-Stuff Rub
+Organic ImmuneGuard
+Organic Kid's Calm
+Organic Liver Cleanse
+Organic Lung Care Spray
+Organic Valerian
+PEA Curcumin Plus
+PEA Plus Dual Action Pain Relief
+ProtectMe Sanitiser
+Sinus ease protocol
+Skin Clear Gel
+Skin Restore Cream
+Sound Asleep
+Speedy Recovery
+SprainAway Cream
+StressArrest
+StressCare Daily
+Technical Naturopathy Pen
+Winter chest, lung and sinus support protocol
+Winter Protocol

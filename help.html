@@ -112,11 +112,14 @@ footer.wrap { color: var(--muted); font-size: 0.88rem; padding-bottom: 40px; }
   <section class="card" id="word">
     <h2>What the Word panel adds</h2>
     <ul>
-      <li><b>Headings (G14).</b> Headings in Word's heading styles are checked for sentence case. Names, places, brands and botanical genus names keep their capitals. Product names in headings will show as amber: ignore them.</li>
+      <li><b>Headings (G14).</b> Headings in Word's heading styles are checked for sentence case. Names, places, brands and botanical genus names keep their capitals, and product names always keep their own capitals (eg Why Kawakawa Stomach Calm works).</li>
       <li><b>Botanical names in italics (S5).</b> Any botanical name on the herb list (eg Echinacea purpurea, Ginkgo biloba) that is not in italics is flagged. Fix puts it in italics.</li>
       <li><b>Australian packaging bold rules.</b> CONTAINS NO in bold (A13), "In a base of" not bold (A12) and the standard warnings not bold (A1).</li>
       <li><b>Fixes keep your formatting.</b> Only the characters that need to change are changed, so bold, italics and styles stay put.</li>
     </ul>
+    <h3>Product names</h3>
+    <p>Product names override sentence case everywhere the checker changes capitals, and an &amp; inside a product name is not flagged (Kānuka Foot &amp; Nail Cream). The panel reads the names from <code>product-names.txt</code>, which sits beside its other files. It matches a name however it is typed: any capitals, with or without macrons, ® or ™, an apostrophe or a hyphen, and &amp; or and. It also knows the shorter ways people write them: without Organic (Children's Echinature), just the last words (Stomach Calm, Foot &amp; Nail Cream) or a coined name on its own (ImmuneGuard). A few everyday phrases that end a product name, such as Pain Relief, keep their capitals in headings too.</p>
+    <p>To add a new product, a Phytomed product or another spelling, open <code>product-names.txt</code> in the GitHub repository, choose the pencil to edit it, add one name per line written the way the product is named, then choose <b>Commit changes</b>. The panel picks it up the next time it opens. If the file is missing, the panel uses the list it was built with (every product on the Kiwiherb shop on 17 November 2026).</p>
     <h3>Good to know</h3>
     <ul>
       <li>It checks the main text of the document, including tables. Headers, footers, text boxes and footnotes are not checked.</li>
@@ -211,6 +214,7 @@ footer.wrap { color: var(--muted); font-size: 0.88rem; padding-bottom: 40px; }
           <li><b>4</b>Items listed under Australia apply to Australian packaging; on New Zealand packaging "derived from" is flagged for checking.</li>
           <li><b>5</b>"Shake well before use" is checked on liquids (anything dosed in mL).</li>
           <li><b>6</b>Two spaces after full stops is not checked on web pages or social posts.</li>
+          <li><b>7</b>Product names (every product on the Kiwiherb shop) always keep their own capitals, so they are never put into sentence case, and an &amp; inside one is not flagged. Shorter forms count too, such as Children's Echinature (without Organic) and Stomach Calm.</li>
         </ol>
       </div>
     </div>
@@ -218,7 +222,7 @@ footer.wrap { color: var(--muted); font-size: 0.88rem; padding-bottom: 40px; }
 </section>
 
 <footer class="wrap">
-  <p>Kiwiherb Mandatories for Word, version <span>1.0</span>. Rules from the Kiwiherb Copy Mandatories 2023/2024/2025/2026, confirmed by MC. Phytomed Medicinal Herbs Limited.</p>
+  <p>Kiwiherb Mandatories for Word, version <span>1.2</span>. Rules from the Kiwiherb Copy Mandatories 2023/2024/2025/2026. Phytomed Medicinal Herbs Limited.</p>
 </footer>
 
 <script type="text/plain" id="manifest-template"><?xml version="1.0" encoding="UTF-8"?>

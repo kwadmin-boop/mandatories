@@ -440,6 +440,110 @@ var MandatoriesEngine = (function () {
     return n.replace(/[.*+?^${}()|[\]\\\/]/g, "\\$&").replace(/'/g, "['\u2019]").replace(/ /g, "\\s+");
   }).join("|");
   // A sentence starts at the start of a line (after any list marker) or after . ! ? or : (and any closing quote or bracket)
+  // Product names keep their own capitals (G1) and may use & (G7), so no rule puts them into sentence case.
+  // Names come from the Kiwiherb shop (active, draft and unlisted products, 17 November 2026). The Word panel
+  // replaces this list with product-names.txt when that file is hosted beside it.
+  var PRODUCT_NAMES = ["Bedtime Bliss", "Calm Down", "Children's Goodnight Chest Syrup", "Children's Immune Drops", "Children's Organic Chest Syrup", "Children's Organic Echinature", "Children's Organic Lung Clear Syrup", "Children's Organic Throat Syrup", "Children's Winter Protocol", "ColicComfort", "DermaCare Cream", "Dual-Action Chest & Lung Support", "Easy blend base cream", "EchiBerry", "Echinacea Capsules", "Echinature", "Echinature8.0", "Ginkgo Alert", "Herbal Allergy Formula", "Herbal Digestive Aid", "Herbal Throat Formula", "Herbal Throat Spray", "ImmuneBerry", "Immunity Bundle", "Kawakawa Soothing Balm", "Kawakawa Stomach Calm", "Kiwiherb Dosage Syringe", "Kiwiherb Herbal Dosage Device", "Kānuka Foot & Nail Cream", "Manuka Oil", "Manuka Skin & Nail Solution", "Mānuka Mouthwash", "Natural Notepad", "Organic Baby Balm", "Organic Calendula Healing Balm", "Organic Chest Syrup", "Organic Comfrey Bruise Balm", "Organic De-Stuff", "Organic De-Stuff for Kids", "Organic De-Stuff Rub", "Organic ImmuneGuard", "Organic Kid's Calm", "Organic Liver Cleanse", "Organic Lung Care Spray", "Organic Valerian", "PEA Curcumin Plus", "PEA Plus Dual Action Pain Relief", "ProtectMe Sanitiser", "Sinus ease protocol", "Skin Clear Gel", "Skin Restore Cream", "Sound Asleep", "Speedy Recovery", "SprainAway Cream", "StressArrest", "StressCare Daily", "Technical Naturopathy Pen", "Winter chest, lung and sinus support protocol", "Winter Protocol"];
+  var PRODUCT_LETTERS = "A-Za-z0-9\\u00c0-\\u017f";
+  var PRODUCT_VOWELS = { a: "[a\\u0101]", e: "[e\\u0113]", i: "[i\\u012b]", o: "[o\\u014d]", u: "[u\\u016b]" };
+  var PRODUCT_RES = [];
+  function plainVowel(c) { var k = "āēīōū".indexOf(c); return k >= 0 ? "aeiou".charAt(k) : c; }
+  // Matches the name however it is typed: any case, with or without macrons, ® or ™, straight or curly
+  // apostrophes, a hyphen or a space (Dual-Action), & or and, and Echinature8.0 or Echinature 8.0
+  function productPattern(name) {
+    return name.replace(/[®™]/g, "").trim().split(/\s+/).map(function (w) {
+      if (w === "&" || w.toLowerCase() === "and") return "(?:&|and)";
+      var out = "";
+      for (var i = 0; i < w.length; i++) {
+        var c = w.charAt(i), v = PRODUCT_VOWELS[plainVowel(c.toLowerCase())];
+        if (v) out += v;
+        else if (c === "'" || c === "‘" || c === "’") out += "['\\u2018\\u2019]?";
+        else if (c === "-") out += "[-\\u2010\\u2011 ]?";
+        else if (/[0-9]/.test(c) && i > 0 && /[A-Za-z]/.test(w.charAt(i - 1))) out += " ?" + c;
+        else out += c.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      }
+      return out + "[\\u00ae\\u2122]?";
+    }).join("[ \\u00a0]+");
+  }
+  // A coined word is a product name on its own: ImmuneGuard, Echinature8.0, De-Stuff
+  function coinedWord(w) { return /[a-z][A-Z]/.test(w) || /[0-9]/.test(w) || /^[A-Z][a-z]*-[A-Z]/.test(w); }
+  // A product name as people write it: in full, without "Organic" (Children's Echinature), or shortened to its
+  // last two or more words (Stomach Calm, Foot & Nail Cream). Shortened forms are marked short.
+  function productVariants(name) {
+    var words = name.replace(/[\u00ae\u2122]/g, "").trim().split(/\s+/), out = [];
+    function add(ws, short) {
+      if (!ws.length || (short && ws.length === 1 && !coinedWord(ws[0]))) return;
+      out.push({ text: ws.join(" "), short: short });
+    }
+    add(words, false);
+    var plain = words.filter(function (w) { return w.toLowerCase() !== "organic"; });
+    [words, plain].forEach(function (form, f) {
+      if (f === 1 && plain.length === words.length) return;
+      if (f === 1) add(form, true);
+      for (var i = 1; i < form.length; i++) {
+        var rest = form.slice(i);
+        if (/^[A-Z]/.test(rest[0]) && (rest.length >= 2 || coinedWord(rest[0]))) add(rest, true);
+      }
+    });
+    return out;
+  }
+  function setProducts(list) {
+    var seen = {}, names = [], forms = [], have = {};
+    (list || []).forEach(function (n) {
+      n = String(n).replace(/\s+/g, " ").trim();
+      if (n && !seen[n.toLowerCase()]) { seen[n.toLowerCase()] = 1; names.push(n); }
+    });
+    PRODUCT_NAMES = names;
+    names.forEach(function (n) {
+      productVariants(n).forEach(function (v) {
+        var k = v.text.toLowerCase();
+        if (have[k] !== undefined) { if (!v.short) forms[have[k]].short = false; return; }
+        have[k] = forms.length;
+        forms.push({ text: v.text, short: v.short, product: n });
+      });
+    });
+    PRODUCT_RES = forms.slice().sort(function (a, b) { return b.text.length - a.text.length; }).map(function (v) {
+      return { name: v.text, product: v.product, short: v.short,
+        re: new RegExp("(?<![" + PRODUCT_LETTERS + "])" + productPattern(v.text) + "(?![" + PRODUCT_LETTERS + "])", "gi") };
+    });
+  }
+  setProducts(PRODUCT_NAMES);
+  // Where product names sit in the text: [{start, end, name}], longest names first, never overlapping
+  function productSpans(text) {
+    var spans = [];
+    PRODUCT_RES.forEach(function (p) {
+      each(p.re, text, function (m) {
+        var s = m.index, e = s + m[0].length;
+        if (!spans.some(function (x) { return s < x.end && e > x.start; })) spans.push({ start: s, end: e, name: p.name, product: p.product, short: p.short });
+      });
+    });
+    return spans.sort(function (a, b) { return a.start - b.start; });
+  }
+  function inProduct(spans, s, e) { return spans.some(function (x) { return s < x.end && e > x.start; }); }
+  // A word re-cased to match the product name it belongs to (Echinature, ImmuneGuard, De-Stuff)
+  function caseLike(w, model) {
+    function upper(c) { return c !== c.toLowerCase(); }
+    if (w.length === model.length) {
+      return w.split("").map(function (c, i) { return upper(model.charAt(i)) ? c.toUpperCase() : c.toLowerCase(); }).join("");
+    }
+    return (upper(model.charAt(0)) ? w.charAt(0).toUpperCase() : w.charAt(0).toLowerCase()) + w.slice(1).toLowerCase();
+  }
+  // Put product names back to their own capitals inside a re-cased suggestion (same length as the text it replaces)
+  function productCase(start, sugg, spans) {
+    var end = start + sugg.length, out = sugg;
+    spans.forEach(function (x) {
+      if (x.short || x.start < start || x.end > end) return;   // only full names are re-cased; short forms could be ordinary words
+      var a = x.start - start, b = x.end - start, model = x.name.replace(/[®™]/g, "").split(/\s+/), k = 0;
+      var cased = out.slice(a, b).split(/(\s+)/).map(function (w) {
+        if (!w || /^\s+$/.test(w)) return w;
+        var mdl = model[k++];
+        return mdl ? caseLike(w, mdl) : w;
+      }).join("");
+      out = out.slice(0, a) + cased + out.slice(b);
+    });
+    return out;
+  }
+
   var HERB_LEAD = "(?:^[ \\t\\u00a0\\u200b\\ufeff]*(?:(?:\\d{1,3}|[A-Za-z])[.)][ \\t]+|[\\u2022\\u25aa\\u25cf\\u25e6*\\u2013\\u2014-][ \\t]*)?" +
     "|(?<=[.!?:]\\s)|(?<=[.!?:]\\s\\s)|(?<=[.!?:][\\u201d\"\\u2019')\\]]\\s)|(?<=[.!?:][\\u201d\"\\u2019')\\]]\\s\\s))";
   var HERB_IS = new RegExp(HERB_LEAD + "[\\u201c\"\\u2018'(\\[]?(" + HERB_ALT +
@@ -488,9 +592,12 @@ var MandatoriesEngine = (function () {
       found.push(f);
     }
 
+    var prod = productSpans(text);
+
     RULES.forEach(function (r) {
       if (!has(r.types, ctype)) return;
       each(r.re, text, function (m) {
+        if (r.rule === "G7" && inProduct(prod, m.index, m.index + m[0].length)) return;   // & is fine in product names
         hit(r.rule, r.kind, m.index, m.index + m[0].length, r.advice, r.fix ? r.fix(m[0], ctype) : null, r.safe);
       });
     });
@@ -587,6 +694,7 @@ var MandatoriesEngine = (function () {
     // S5 Latin binomials: only the first word capitalised
     each(new RegExp("\\b(" + LATIN + ")[ \\u00a0]+([A-Z][a-z]{3,}(?:-[a-z]+)?)\\b", "g"), text, function (m) {
       var ep = m[2];
+      if (inProduct(prod, m.index, m.index + m[0].length)) return;   // a product name, not a botanical name
       if (EPITHET_STOP.indexOf(ep) < 0 && !LATIN_FULL.test(ep) && EPITHET_END.test(ep.toLowerCase())) {
         hit("S5", "CHECK", m.index, m.index + m[0].length,
           "botanical names: only the first word capitalised (" + m[1] + " " + ep.toLowerCase() + ")",
@@ -648,7 +756,7 @@ var MandatoriesEngine = (function () {
         var stop = text.indexOf(".", m.index + m[0].length), endC = stop >= 0 && stop - m.index < 160 ? stop + 1 : m.index + m[0].length;
         var s = text.slice(m.index, endC), lower = s.toLowerCase();
         hit("A1", "FIX", m.index, endC, "AU warnings are not in capitals (or bold)",
-          lower.charAt(0).toUpperCase() + lower.slice(1).replace(/\bmanuka\b/g, "mānuka").replace(/\baust l\b/g, "AUST L"), false);
+          productCase(m.index, lower.charAt(0).toUpperCase() + lower.slice(1).replace(/\bmanuka\b/g, "mānuka").replace(/\baust l\b/g, "AUST L"), prod), false);
       });
       each(/\bhoney\b(?!\s*\()/gi, text, function (m) {
         hit("A14", "CHECK", m.index, m.index + m[0].length, "ingredients: name the honey type, eg Honey (Mānuka and Thyme)");
@@ -694,14 +802,15 @@ var MandatoriesEngine = (function () {
   }
 
   return { scan: scan, applyFixes: applyFixes, countFixable: countFixable, TYPES: ALL, HP_EXACT: HP_EXACT,
-    HERB_NAMES: HERB_NAMES.slice(), GENERA: LATIN.split("|") };
+    HERB_NAMES: HERB_NAMES.slice(), GENERA: LATIN.split("|"),
+    productSpans: productSpans, setProducts: setProducts, products: function () { return PRODUCT_NAMES.slice(); } };
 })();
 
 if (typeof module !== "undefined") module.exports = MandatoriesEngine;
 
 </script>
 <script>
-window.KIWIHERB_VERSION = "1.0";
+window.KIWIHERB_VERSION = "1.2";
 window.KIWIHERB_BOTANICAL = ["Achillea millefolium", "Actaea racemosa", "Adhatoda vasica", "Aesculus hippocastanum", "Agaricus subrufescens", "Agrimonia eupatoria", "Agropyron repens", "Albizzia lebbeck", "Alchemilla vulgaris", "Allium sativum", "Alpinia galanga", "Althaea officinalis", "Andrographis paniculata", "Angelica archangelica", "Angelica sinensis", "Apium graveolens", "Arctium lappa", "Arctostaphylos uva-ursi", "Armoracia rusticana", "Arnica montana", "Artemisia absinthium", "Artemisia annua", "Asclepias tuberosa", "Asparagus racemosa", "Astragalus membranaceous", "Avena sativa", "Bacopa monniera", "Ballota nigra", "Baptisia tinctoria", "Barosma betulina", "Berberis vulgaris", "Bidens cernua", "Bupleurum falcatum", "Calendula officinalis", "Camelia sinensis", "Camellia sinensis", "Capsella bursa-pastoris", "Capsicum annuum", "Caulophyllum thalictroides", "Ceanothus americanus", "Centella asiatica", "Chelidonium majus", "Cinnamomum verum", "Cistus incanus", "Cnicus benedictus", "Codonopsis pilosula", "Coleus forskholii", "Commiphora molmol", "Coprosma robusta", "Coptis chinensis", "Cordyceps militaris", "Corydalis ambigua", "Corydalis yanhusuo", "Crataeva nurvala", "Crocus sativas", "Cryptolepis sanguinolenta", "Curcuma longa", "Cynara scolymus", "Dioscorea villosa", "Dodonaea viscosa", "Dysoxylum spectabile", "Echinacea angustifolia", "Echinacea purpurea", "Eleutherococcus senticosus", "Epilobium parviflorum", "Epimedium sagittatum", "Equisetum arvense", "Eschscholtzia californica", "Eucalyptus globulus", "Eupatorium perfoliatum", "Eupatorium purpureum", "Euphorbia hirta", "Euphrasia officinalis", "Filipendula ulmaria", "Foeniculum vulgare", "Galega officinalis", "Galium aparine", "Ganoderma lucidum", "Gentiana lutea", "Ginkgo biloba", "Glycyrrhiza glabra", "Grifola frondosa", "Gymnema sylvestre", "Hamamelis virginiana", "Harpagophytum procumbens", "Hebe salicifolia", "Hemidesmus indicus", "Hericium erinaceus", "Hoheria populnea", "Houttuynia cordata", "Humulus lupulus", "Hypericum perforatum", "Hyssopus officinalis", "Inonotus obliquus", "Inula helenium", "Iris versicolor", "Isatis tinctoria", "Juglans nigra", "Juniperus communis", "Kunzea ericoides", "Lavandula officinalis", "Lentinula edodes", "Leonurus cardiaca", "Leptospermum scoparium", "Ligustrum lucidum", "Lomatium dissectum", "Lycopus virginiclis", "Macrocystis pyrifera", "Macropiper excelsum", "Magnolia officinalis", "Mahonia aquifolium", "Marrubium vulgare", "Matricaria chamomilla", "Matricaria recutita", "Melissa officinalis", "Mentha piperita", "Momordica charantia", "Nigella sativa", "Ocimum tenuiflorum", "Olea europaea", "Paeonia lactiflora", "Panax ginseng", "Panax notoginseng", "Panax quinquefolium", "Parietaria officinalis", "Passiflora incarnata", "Pelargonium sidoides", "Phormium tenax", "Phyllocladus trichomanoides", "Phytolacca decandra", "Pimpinella anisum", "Piper excelsum", "Piper methysticum", "Piper nigrum", "Piscidia piscipula", "Plantago lanceolata", "Podocarpus totara", "Polygonum cuspidatum", "Polygonum multiflorum", "Polyporus umbellatus", "Pomaderris kumeraho", "Pomaderris kumerahou", "Prunus serotina", "Pseudowintera colorata", "Pueraria lobata", "Punica granatum", "Rabdosia rubescens", "Rehmania glutinosa", "Rehmannia glutinosa", "Rhamnus purshiana", "Rheum officinale", "Rhodiola rosea", "Ribes nigrum", "Rosa canina", "Rosmarinus officinalis", "Rubus idaeus", "Rumex crispus", "Ruscus aculeatus", "Salvia miltiorrhiza", "Salvia officinalis", "Sambucus nigra", "Schisandra chinensis", "Scutellaria baicalensis", "Scutellaria lateriflora", "Serenoa serrulata", "Sida acuta", "Silybum marianum", "Solanum aviculare", "Solidago canadensis", "Stachys officinalis", "Stellaria media", "Symphytum officinale", "Syzygium aromaticum", "Tabebuia avellanedae", "Tanacetum parthenium", "Taraxacum officinale", "Thuja occidentalis", "Thymus vulgaris", "Trametes versicolor", "Tremella fuciformis", "Tribulus terrestris", "Trifolium pratense", "Trigonella foenum-graecum", "Tropaeolum majus", "Turnera diffusa", "Uncaria tomentosa", "Urtica dioica", "Usnea barbata", "Vaccinium myrtillus", "Valeriana edulis", "Valeriana officinalis", "Verbascum thapsus", "Verbena officinalis", "Veronica salicifolia", "Viburnum opulus", "Viburnum prunifolium", "Viola tricolor", "Viscum album", "Vitex agnus-castus", "Withania somnifera", "Wolfiporia hoelen", "Zanthoxylum clava-herculis", "Zea mays", "Zingiber officinale", "Zizyphus spinosa"];
 </script>
 <script>
@@ -740,7 +849,7 @@ window.KIWIHERB_BOTANICAL = ["Achillea millefolium", "Actaea racemosa", "Adhatod
   var HEADING_TYPES = ["document", "web", "pos", "packaging-nz", "packaging-au"];
   var EYE = [
     ["G1", "Product names keep every word capitalised (Peppermint Oil). Supplier brands keep their own styling.", ALLT],
-    ["G14", "Headings that use Word's heading styles are checked automatically. Check any other headings by eye: sentence case, eg Main indications.", HEADING_TYPES],
+    ["G14", "Headings that use Word's heading styles are checked automatically, leaving product names in their own capitals. Check any other headings by eye: sentence case, eg Main indications.", HEADING_TYPES],
     ["G5", "Full stops on full sentences only, not on short fragments or bullet fragments.", ALLT],
     ["S5", "Marketing and education: common name first. Packaging: botanical name first. (Italics are checked automatically for the herbs on the list.)", ALLT],
     ["S5", "Front label or carton: full botanical name only, with no common name in brackets.", ["packaging-au"]],
@@ -902,11 +1011,14 @@ window.KIWIHERB_BOTANICAL = ["Achillea millefolium", "Actaea racemosa", "Adhatod
     m.paras.forEach(function (P) {
       if (!P.heading) return;
       var text = normText(P.raw), edits = [], re = /[A-Za-z\u00c0-\u00d6\u00d8-\u00f6\u00f8-\u017f]+(?:['\u2019][A-Za-z]+)?/g, w, first = true, last = 0;
+      var products = E.productSpans(text);
       while ((w = re.exec(text)) !== null) {
         var word = w[0], gap = text.slice(last, w.index);
         last = w.index + word.length;
         if (/[.:!?]/.test(gap)) first = true;
         if (first) { first = false; continue; }
+        // Product names override sentence case: every word in one keeps its capitals
+        if (products.some(function (x) { return w.index < x.end && w.index + word.length > x.start; })) continue;
         if (!/^[A-Z\u00c0-\u00de\u0100-\u017f]/.test(word) || word.charAt(0) === word.charAt(0).toLowerCase()) continue;
         var letters = word.replace(/['\u2019].*$/, "");
         if (letters.length > 1 && letters === letters.toUpperCase()) continue;
@@ -917,7 +1029,7 @@ window.KIWIHERB_BOTANICAL = ["Achillea millefolium", "Actaea racemosa", "Adhatod
       if (edits.length) {
         var found = text.replace(/\s+$/, "");
         out.push({ start: P.start, end: P.start + found.length, rule: "G14", kind: "CHECK", line: 0, found: found,
-          advice: "headings are sentence case (eg Main indications): only the first word and names keep capitals",
+          advice: "headings are sentence case (eg Main indications): only the first word, names and product names keep capitals",
           edits: edits, suggest: null });
       }
     });
@@ -1619,6 +1731,20 @@ window.KIWIHERB_BOTANICAL = ["Achillea millefolium", "Actaea racemosa", "Adhatod
 
   if (window.__MOCK__) window.__PANE__ = state;   // test harness only: the mock Word sets __MOCK__
 
+  // Product names: the list in product-names.txt (hosted beside this page) replaces the built-in list from the
+  // Kiwiherb shop, so new products can be added without rebuilding the panel. Give up after a few seconds.
+  function loadProducts() {
+    var url;
+    try { url = new URL("product-names.txt", window.location.href).href; } catch (e) { return Promise.resolve(); }
+    if (!window.fetch) return Promise.resolve();
+    var get = window.fetch(url, { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : null; }).then(function (t) {
+      if (typeof t !== "string") return;
+      var names = t.split(/\r?\n/).map(function (l) { return l.replace(/#.*$/, "").trim(); }).filter(Boolean);
+      if (names.length) { E.setProducts(names); state.productList = names.length; }
+    }).catch(function () { /* the built-in list stays */ });
+    return Promise.race([get, new Promise(function (r) { setTimeout(r, 4000); })]);
+  }
+
   function start() {
     if (window.__TOO_OLD__) return;
     if (!E) { showOutside("The checker did not load. Close the panel and open it again."); return; }
@@ -1638,7 +1764,7 @@ window.KIWIHERB_BOTANICAL = ["Achillea millefolium", "Actaea racemosa", "Adhatod
       state.api.w14 = req.isSetSupported("WordApi", "1.4");
       loadSettings();
       setup();
-      check();
+      loadProducts().then(function () { check(); });
     });
   }
   start();
